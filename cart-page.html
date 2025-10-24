@@ -897,17 +897,21 @@
             const currentLang = localStorage.getItem('kioskLanguage') || 'en';
             const cartTitle = document.getElementById('cartTitle');
             
+            console.log('Updating cart title, current language:', currentLang);
+            console.log('Cart title element:', cartTitle);
+            
             try {
                 if (currentLang === 'en') {
-                    cartTitle.innerHTML = '<img src="cartfont.png" alt="Cart" style="max-height: 45px; width: auto; object-fit: contain;">';
+                    cartTitle.innerHTML = '<img src="cartfont.png" alt="Cart" style="max-height: 45px; width: auto; object-fit: contain;" onerror="console.error(\'Failed to load cartfont.png\'); this.style.border=\'2px solid red\';">';
                 } else if (currentLang === 'ms') {
-                    cartTitle.innerHTML = '<img src="trolifont.png" alt="Cart" style="max-height: 45px; width: auto; object-fit: contain;">';
+                    cartTitle.innerHTML = '<img src="trolifont.png" alt="Cart" style="max-height: 45px; width: auto; object-fit: contain;" onerror="console.error(\'Failed to load trolifont.png\'); this.style.border=\'2px solid red\';">';
                 } else {
-                    cartTitle.innerHTML = '<img src="cartfont.png" alt="Cart" style="max-height: 45px; width: auto; object-fit: contain;">';
+                    cartTitle.innerHTML = '<img src="cartfont.png" alt="Cart" style="max-height: 45px; width: auto; object-fit: contain;" onerror="console.error(\'Failed to load cartfont.png\'); this.style.border=\'2px solid red\';">';
                 }
+                console.log('Cart title updated to:', cartTitle.innerHTML);
             } catch (error) {
-                console.log('Error updating cart title:', error);
-                cartTitle.innerHTML = '<img src="cartfont.png" alt="Cart" style="max-height: 45px; width: auto; object-fit: contain;">';
+                console.error('Error updating cart title:', error);
+                cartTitle.innerHTML = '<img src="cartfont.png" alt="Cart" style="max-height: 45px; width: auto; object-fit: contain;" onerror="console.error(\'Failed to load cartfont.png\'); this.style.border=\'2px solid red\';">';
             }
         }
 
@@ -1016,5 +1020,4 @@
     </script>
 </body>
 </html>
-
 
