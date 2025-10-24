@@ -689,7 +689,7 @@
             <img src="logo old.png" alt="Ali, Muthu & Ah Hock" class="logo">
         </div>
         <div class="cart-container">
-            <div class="header-title" id="cartTitle" data-translate="cart">Cart</div>
+            <div class="header-title" id="cartTitle">Cart</div>
         </div>
     </div>
 
@@ -932,14 +932,14 @@
                 img.alt = 'Cart';
                 img.style.cssText = 'height: 45px; width: auto; object-fit: contain; display: block;';
                 
-                // Add error handler
+                // Add error handler - fallback to text if image fails
                 img.onerror = function() {
-                    console.error('Failed to load image:', imageSrc);
-                    // Fallback to text if image fails
-                    cartTitle.textContent = currentLang === 'ms' ? 'Troli' : 'Cart';
-                    cartTitle.style.color = 'white';
-                    cartTitle.style.fontSize = '24px';
+                    console.error('Failed to load cart title image:', imageSrc);
+                    cartTitle.textContent = currentLang === 'ms' ? 'TROLI' : 'CART';
+                    cartTitle.style.color = '#ffffff';
+                    cartTitle.style.fontSize = '28px';
                     cartTitle.style.fontWeight = 'bold';
+                    cartTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
                 };
                 
                 // Clear and append
@@ -949,10 +949,11 @@
             } catch (error) {
                 console.error('Error updating cart title:', error);
                 // Fallback to text
-                cartTitle.textContent = currentLang === 'ms' ? 'Troli' : 'Cart';
-                cartTitle.style.color = 'white';
-                cartTitle.style.fontSize = '24px';
+                cartTitle.textContent = currentLang === 'ms' ? 'TROLI' : 'CART';
+                cartTitle.style.color = '#ffffff';
+                cartTitle.style.fontSize = '28px';
                 cartTitle.style.fontWeight = 'bold';
+                cartTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
             }
         }
 
