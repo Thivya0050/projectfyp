@@ -48,10 +48,10 @@
         .header-section {
             background-color: #bf8a47;
             width: 100%;
-            height: 12vh;
+            height: 10vh;
             display: flex;
             align-items: center;
-            padding: 15px 40px;
+            padding: 10px 40px;
             flex-shrink: 0;
             position: relative;
         }
@@ -81,11 +81,11 @@
             justify-content: center;
             width: 100%;
             height: 100%;
-            min-height: 45px;
+            min-height: 35px;
         }
 
         .header-title img {
-            height: 45px;
+            height: 35px;
             width: auto;
             object-fit: contain;
             display: block;
@@ -98,7 +98,7 @@
         }
 
         .logo {
-            height: 85%;
+            height: 70%;
             width: auto;
             object-fit: contain;
         }
@@ -107,7 +107,7 @@
         .cart-section {
             flex: 1;
             width: 100%;
-            padding: 20px 40px;
+            padding: 15px 40px;
             overflow-y: auto;
             background-color: #efebce;
             position: relative;
@@ -159,30 +159,30 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 12px;
         }
 
         .cart-item {
             background-color: #362315;
-            border-radius: 25px;
-            padding: 20px 25px;
+            border-radius: 20px;
+            padding: 15px 20px;
             display: flex;
             align-items: center;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            min-height: 140px;
+            min-height: 120px;
         }
 
         .item-image-container {
             background-color: #ffffff;
             border-radius: 15px;
-            width: 120px;
-            height: 120px;
-            min-width: 120px;
+            width: 100px;
+            height: 100px;
+            min-width: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            margin-right: 25px;
+            margin-right: 20px;
         }
 
         .item-image {
@@ -200,17 +200,17 @@
         }
 
         .item-name {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: white;
         }
 
         .item-info {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: 8px;
+            gap: 8px;
+            margin-top: 6px;
         }
 
         .item-price-row {
@@ -220,7 +220,7 @@
         }
 
         .item-total-price {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: bold;
             color: white;
         }
@@ -344,14 +344,15 @@
         /* Total Section */
         .total-section {
             width: 100%;
-            padding: 15px 40px;
+            padding: 10px 40px;
             background-color: #efebce;
+            flex-shrink: 0;
         }
 
         .total-container {
             background-color: #ffffff;
-            border-radius: 20px;
-            padding: 20px 40px;
+            border-radius: 15px;
+            padding: 15px 30px;
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
@@ -361,14 +362,14 @@
         }
 
         .total-label {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             color: #000000;
             text-transform: uppercase;
         }
 
         .total-amount {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: bold;
             color: #000000;
         }
@@ -377,30 +378,31 @@
         .footer-section {
             background-color: #efebce;
             width: 100%;
-            padding: 20px 40px 30px 40px;
+            padding: 12px 40px 15px 40px;
+            flex-shrink: 0;
         }
 
         .button-container {
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            gap: 25px;
+            gap: 20px;
         }
 
         .back-button {
             background-color: #362315;
             color: white;
             border: none;
-            border-radius: 20px;
-            padding: 22px 50px;
-            font-size: 24px;
+            border-radius: 15px;
+            padding: 18px 40px;
+            font-size: 22px;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            flex: 0 0 200px;
+            flex: 0 0 180px;
         }
 
         .back-button:hover {
@@ -413,9 +415,9 @@
             background-color: #f7b817;
             color: #362315;
             border: none;
-            border-radius: 20px;
-            padding: 22px 50px;
-            font-size: 24px;
+            border-radius: 15px;
+            padding: 18px 40px;
+            font-size: 22px;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
@@ -930,7 +932,7 @@
                 const img = document.createElement('img');
                 img.src = imageSrc;
                 img.alt = 'Cart';
-                img.style.cssText = 'height: 45px; width: auto; object-fit: contain; display: block;';
+                img.style.cssText = 'height: 35px; width: auto; object-fit: contain; display: block;';
                 
                 // Add error handler - fallback to text if image fails
                 img.onerror = function() {
