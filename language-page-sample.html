@@ -441,6 +441,9 @@
                 setLanguage(langCode);
             }
             
+            // Update title images immediately after language selection
+            updateLanguagePageTitles();
+            
             // Visual feedback
             const buttons = document.querySelectorAll('.language-button');
             buttons.forEach(btn => {
@@ -516,7 +519,7 @@
             if (currentLang === 'en') {
                 selectLangBtn.innerHTML = '<img src="languagefont.png" alt="Select Language">';
             } else if (currentLang === 'ms') {
-                selectLangBtn.innerHTML = '<img src="pbfont.png" alt="Select Language">';
+                selectLangBtn.innerHTML = '<img src="PBfont.png" alt="Select Language">';
             } else {
                 selectLangBtn.textContent = t('selectLanguage');
             }
