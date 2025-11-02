@@ -453,106 +453,106 @@
             }
 
             .header-section {
-                height: 9vh;
-                padding: 10px 40px;
+                height: 8vh;
+                padding: 8px 40px;
             }
 
             .cart-section {
-                padding: 15px 40px;
+                padding: 12px 40px;
             }
 
             .cart-items-container {
-                gap: 15px;
+                gap: 12px;
             }
 
             .cart-item {
-                padding: 18px 25px;
-                min-height: 140px;
+                padding: 15px 20px;
+                min-height: 130px;
             }
 
             .item-image-container {
-                width: 120px;
-                height: 120px;
-                min-width: 120px;
-                margin-right: 25px;
+                width: 110px;
+                height: 110px;
+                min-width: 110px;
+                margin-right: 20px;
             }
 
             .item-name {
-                font-size: 24px;
-                margin-bottom: 10px;
+                font-size: 22px;
+                margin-bottom: 8px;
             }
 
             .quantity-btn {
-                width: 34px;
-                height: 34px;
-                font-size: 20px;
+                width: 32px;
+                height: 32px;
+                font-size: 18px;
             }
 
             .quantity-display {
-                font-size: 19px;
-                min-width: 42px;
+                font-size: 18px;
+                min-width: 40px;
             }
 
             .item-total-price {
-                font-size: 24px;
+                font-size: 22px;
             }
 
             .item-customize,
             .item-remove {
-                padding: 11px 22px;
-                font-size: 15px;
+                padding: 10px 20px;
+                font-size: 14px;
             }
 
             .total-section {
-                padding: 10px 40px;
+                padding: 8px 40px;
             }
 
             .total-container {
-                padding: 18px 40px;
+                padding: 15px 35px;
             }
 
             .total-label {
-                font-size: 28px;
+                font-size: 26px;
             }
 
             .total-amount {
-                font-size: 32px;
+                font-size: 30px;
             }
 
             .footer-section {
-                padding: 12px 40px 18px 40px;
+                padding: 10px 40px 15px 40px;
             }
 
             .button-container {
-                gap: 25px;
+                gap: 20px;
             }
 
             .back-button {
-                padding: 20px 45px;
-                font-size: 24px;
-                flex: 0 0 200px;
+                padding: 18px 40px;
+                font-size: 22px;
+                flex: 0 0 190px;
             }
 
             .pay-button {
-                padding: 20px 45px;
-                font-size: 24px;
+                padding: 18px 40px;
+                font-size: 22px;
             }
         }
 
         /* Tablet responsive */
         @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) {
             .cart-container {
-                border-radius: 20px;
-                padding: 18px 100px;
-                min-width: 300px;
+                border-radius: 18px;
+                padding: 15px 85px;
+                min-width: 280px;
             }
 
             .header-title {
-                min-height: 40px;
+                min-height: 35px;
             }
 
             .header-title img {
-                height: 40px;
+                height: 35px;
             }
         }
 
@@ -932,7 +932,11 @@
                 const img = document.createElement('img');
                 img.src = imageSrc;
                 img.alt = 'Cart';
-                img.style.cssText = 'height: 35px; width: auto; object-fit: contain; display: block;';
+                
+                // Adjust height based on viewport for tablet optimization
+                const isSamsungA8 = window.innerWidth >= 1200 && window.innerWidth <= 1920 && window.innerHeight >= 800;
+                const imgHeight = isSamsungA8 ? '35px' : '35px';
+                img.style.cssText = `height: ${imgHeight}; width: auto; object-fit: contain; display: block;`;
                 
                 // Add error handler - fallback to text if image fails
                 img.onerror = function() {
