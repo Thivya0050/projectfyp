@@ -379,8 +379,115 @@
             transform: translateY(0);
         }
 
-        /* Samsung A8 Tablet Optimization - 1920x1200 */
-        @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) {
+        /* Samsung A8 Tablet Portrait Mode - 1200x1920 */
+        @media (max-width: 1200px) and (min-height: 1900px) and (orientation: portrait) {
+            body {
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            .header-section {
+                height: 8vh;
+                padding: 8px 30px;
+            }
+
+            .notification-badge {
+                top: 8px;
+                right: 30px;
+                padding: 8px 14px;
+                font-size: 12px;
+                max-width: 280px;
+            }
+
+            .notification-badge-title {
+                font-size: 11px;
+                margin-bottom: 3px;
+            }
+
+            .notification-badge-content {
+                font-size: 12px;
+            }
+
+            .content-section {
+                padding: 8px 30px;
+            }
+
+            .content-container {
+                gap: 8px;
+            }
+
+            .item-card {
+                padding: 10px 18px;
+                gap: 15px;
+            }
+
+            .item-image-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            .item-name {
+                font-size: 17px;
+            }
+
+            .item-price {
+                font-size: 21px;
+            }
+
+            .customization-header {
+                padding: 8px 18px;
+                font-size: 15px;
+            }
+
+            .customization-body {
+                padding: 8px 18px;
+            }
+
+            .customization-option {
+                padding: 4px 0;
+            }
+
+            .option-label {
+                font-size: 14px;
+            }
+
+            .option-price {
+                font-size: 12px;
+            }
+
+            .option-qty-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+
+            .option-qty-display {
+                font-size: 15px;
+                min-width: 26px;
+            }
+
+            .footer-section {
+                padding: 8px 30px 12px 30px;
+            }
+
+            .button-container {
+                gap: 15px;
+            }
+
+            .back-button {
+                padding: 14px 30px;
+                font-size: 17px;
+                flex: 0 0 140px;
+            }
+
+            .pay-button {
+                padding: 14px 30px;
+                font-size: 17px;
+            }
+        }
+
+        /* Samsung A8 Tablet Landscape Mode - 1920x1200 */
+        @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) and (orientation: landscape) {
             body {
                 height: 100vh;
                 overflow: hidden;
