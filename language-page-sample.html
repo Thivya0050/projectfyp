@@ -251,8 +251,65 @@
             transform: translateY(-1px);
         }
 
-        /* Samsung A8 Tablet Optimization - 1920x1200 */
-        @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) {
+        /* Samsung A8 Tablet Portrait Mode - 1200x1920 */
+        @media (max-width: 1200px) and (min-height: 1900px) and (orientation: portrait) {
+            .back-button-section {
+                height: 12vh;
+                padding: 12px 25px;
+            }
+
+            .back-button {
+                padding: 18px 45px;
+                font-size: 20px;
+            }
+
+            .back-button img {
+                max-height: 45px;
+            }
+
+            .language-section {
+                flex: 0 0 38%;
+                padding: 12px 25px;
+            }
+
+            .language-container {
+                padding: 25px 40px;
+            }
+
+            .language-grid {
+                gap: 18px;
+            }
+
+            .language-button {
+                font-size: 22px;
+                padding: 15px;
+            }
+
+            .dining-section {
+                flex: 0 0 38%;
+                padding: 12px 25px;
+            }
+
+            .dining-container {
+                padding: 25px 40px;
+            }
+
+            .dining-grid {
+                gap: 18px;
+            }
+
+            .dining-button {
+                font-size: 24px;
+                padding: 20px;
+            }
+
+            .dining-button img {
+                max-height: 70px;
+            }
+        }
+
+        /* Samsung A8 Tablet Landscape Mode - 1920x1200 */
+        @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) and (orientation: landscape) {
             .back-button-section {
                 height: 12vh;
             }
