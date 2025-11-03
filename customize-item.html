@@ -619,7 +619,7 @@
         </div>
         <!-- Notification Badge -->
         <div class="notification-badge" id="notificationBadge">
-            <div class="notification-badge-title">Add-ons Selected:</div>
+            <div class="notification-badge-title" data-translate="addonsSelected">Add-ons Selected:</div>
             <div class="notification-badge-content" id="notificationContent"></div>
         </div>
     </div>
@@ -964,12 +964,43 @@
             const currentLang = localStorage.getItem('kioskLanguage') || 'en';
             const customizeTitle = document.getElementById('customizeTitle');
             
-            if (currentLang === 'en') {
-                customizeTitle.innerHTML = '<img src="custfont.png" alt="Customize">';
-            } else if (currentLang === 'ms') {
-                customizeTitle.innerHTML = '<img src="ubahsuaifont.png" alt="Customize">';
-            } else {
+            try {
+                // English & Malay: Use IMAGE fonts
+                if (currentLang === 'en' || currentLang === 'ms') {
+                    const imageSrc = (currentLang === 'ms') ? 'ubahsuaifont.png' : 'custfont.png';
+                    
+                    const img = document.createElement('img');
+                    img.src = imageSrc;
+                    img.alt = 'Customize';
+                    img.style.cssText = 'height: 35px; width: auto; object-fit: contain; display: block;';
+                    
+                    img.onerror = function() {
+                        console.error('Failed to load customize title image:', imageSrc);
+                        customizeTitle.textContent = t('customize');
+                        customizeTitle.style.color = '#ffffff';
+                        customizeTitle.style.fontSize = '24px';
+                        customizeTitle.style.fontWeight = 'bold';
+                        customizeTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+                    };
+                    
+                    customizeTitle.innerHTML = '';
+                    customizeTitle.appendChild(img);
+                } 
+                // Tamil & Chinese: Use TEXT translations
+                else {
+                    customizeTitle.textContent = t('customize');
+                    customizeTitle.style.color = '#ffffff';
+                    customizeTitle.style.fontSize = '24px';
+                    customizeTitle.style.fontWeight = 'bold';
+                    customizeTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+                }
+            } catch (error) {
+                console.error('Error updating customize title:', error);
                 customizeTitle.textContent = t('customize');
+                customizeTitle.style.color = '#ffffff';
+                customizeTitle.style.fontSize = '24px';
+                customizeTitle.style.fontWeight = 'bold';
+                customizeTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
             }
         }
 
