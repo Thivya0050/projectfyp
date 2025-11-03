@@ -293,8 +293,54 @@
             transform: translateY(-1px);
         }
 
-        /* Samsung A8 Tablet Optimization - 10.5" 1920x1200 */
-        @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) {
+        /* Samsung A8 Tablet Portrait Mode - 1200x1920 */
+        @media (max-width: 1200px) and (min-height: 1900px) and (orientation: portrait) {
+            .top-section {
+                height: 20vh;
+            }
+            
+            .logo-video {
+                max-height: 200px;
+            }
+            
+            .middle-section {
+                flex: 1;
+            }
+            
+            .bottom-section {
+                height: 15vh;
+            }
+            
+            .start-button {
+                padding: 25px 80px;
+                font-size: 32px;
+            }
+            
+            .image-card {
+                width: 90%;
+                height: 85%;
+            }
+            
+            .halal-badge {
+                width: 140px;
+                height: 140px;
+                bottom: 40px;
+                right: 0px;
+            }
+            
+            .dot {
+                width: 14px;
+                height: 14px;
+            }
+            
+            .carousel-dots {
+                gap: 16px;
+                margin-top: 30px;
+            }
+        }
+
+        /* Samsung A8 Tablet Landscape Mode - 1920x1200 */
+        @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) and (orientation: landscape) {
             .top-section {
                 height: 25vh;
             }
