@@ -175,8 +175,64 @@
             display: none; /* Hidden - timer removed */
         }
 
-        /* Samsung A8 Tablet Optimization - 1920x1200 */
-        @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) {
+        /* Samsung A8 Tablet Portrait Mode - 1200x1920 */
+        @media (max-width: 1200px) and (min-height: 1900px) and (orientation: portrait) {
+            body {
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            .header-section {
+                height: 10vh;
+                padding: 12px 30px;
+            }
+
+            .main-content {
+                padding: 30px 40px;
+                gap: 30px;
+            }
+
+            .thank-you-message {
+                font-size: 24px;
+                line-height: 1.5;
+            }
+
+            .order-card {
+                padding: 35px 45px;
+                max-width: 500px;
+            }
+
+            .order-label {
+                font-size: 20px;
+                margin-bottom: 16px;
+            }
+
+            .order-number {
+                font-size: 100px;
+                margin: 20px 0;
+            }
+
+            .order-number-small {
+                font-size: 35px;
+            }
+
+            .order-instructions {
+                font-size: 18px;
+                line-height: 1.6;
+            }
+
+            .footer-message {
+                font-size: 22px;
+            }
+
+            .redirect-timer {
+                font-size: 16px;
+                padding: 14px 28px;
+            }
+        }
+
+        /* Samsung A8 Tablet Landscape Mode - 1920x1200 */
+        @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) and (orientation: landscape) {
             body {
                 height: 100vh;
                 overflow: hidden;
