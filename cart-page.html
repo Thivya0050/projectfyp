@@ -925,37 +925,42 @@
             }
             
             try {
-                // Determine which image to use based on language
-                const imageSrc = (currentLang === 'ms') ? 'trolifont.png' : 'cartfont.png';
-                
-                // Create image element
-                const img = document.createElement('img');
-                img.src = imageSrc;
-                img.alt = 'Cart';
-                
-                // Adjust height based on viewport for tablet optimization
-                const isSamsungA8 = window.innerWidth >= 1200 && window.innerWidth <= 1920 && window.innerHeight >= 800;
-                const imgHeight = isSamsungA8 ? '35px' : '35px';
-                img.style.cssText = `height: ${imgHeight}; width: auto; object-fit: contain; display: block;`;
-                
-                // Add error handler - fallback to text if image fails
-                img.onerror = function() {
-                    console.error('Failed to load cart title image:', imageSrc);
-                    cartTitle.textContent = currentLang === 'ms' ? 'TROLI' : 'CART';
+                // English & Malay: Use IMAGE fonts
+                if (currentLang === 'en' || currentLang === 'ms') {
+                    const imageSrc = (currentLang === 'ms') ? 'trolifont.png' : 'cartfont.png';
+                    
+                    const img = document.createElement('img');
+                    img.src = imageSrc;
+                    img.alt = 'Cart';
+                    
+                    const isSamsungA8 = window.innerWidth >= 1200 && window.innerWidth <= 1920 && window.innerHeight >= 800;
+                    const imgHeight = isSamsungA8 ? '35px' : '35px';
+                    img.style.cssText = `height: ${imgHeight}; width: auto; object-fit: contain; display: block;`;
+                    
+                    img.onerror = function() {
+                        console.error('Failed to load cart title image:', imageSrc);
+                        cartTitle.textContent = t('cart');
+                        cartTitle.style.color = '#ffffff';
+                        cartTitle.style.fontSize = '28px';
+                        cartTitle.style.fontWeight = 'bold';
+                        cartTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+                    };
+                    
+                    cartTitle.innerHTML = '';
+                    cartTitle.appendChild(img);
+                } 
+                // Tamil & Chinese: Use TEXT translations
+                else {
+                    cartTitle.textContent = t('cart');
                     cartTitle.style.color = '#ffffff';
                     cartTitle.style.fontSize = '28px';
                     cartTitle.style.fontWeight = 'bold';
                     cartTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
-                };
-                
-                // Clear and append
-                cartTitle.innerHTML = '';
-                cartTitle.appendChild(img);
+                }
                 
             } catch (error) {
                 console.error('Error updating cart title:', error);
-                // Fallback to text
-                cartTitle.textContent = currentLang === 'ms' ? 'TROLI' : 'CART';
+                cartTitle.textContent = t('cart');
                 cartTitle.style.color = '#ffffff';
                 cartTitle.style.fontSize = '28px';
                 cartTitle.style.fontWeight = 'bold';
