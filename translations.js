@@ -46,6 +46,7 @@ const translations = {
         confirmRemove: "Remove this item from cart?",
         customizationOptions: "CUSTOMIZATION OPTIONS",
         saveAdd: "SAVE & ADD TO CART",
+        addonsSelected: "Add-ons Selected:",
         
         // Payment
         payment: "PAYMENT",
@@ -142,6 +143,7 @@ const translations = {
         confirmRemove: "Buang item ini dari troli?",
         customizationOptions: "PILIHAN PENYESUAIAN",
         saveAdd: "SIMPAN & TAMBAH KE TROLI",
+        addonsSelected: "Tambahan Dipilih:",
         
         // Payment
         payment: "BAYARAN",
@@ -238,6 +240,7 @@ const translations = {
         confirmRemove: "இந்த உருப்படியை கூடையிலிருந்து அகற்றவா?",
         customizationOptions: "தனிப்பயனாக்க விருப்பங்கள்",
         saveAdd: "சேமி & கூடையில் சேர்",
+        addonsSelected: "கூடுதல் தேர்வுகள்:",
         
         // Payment
         payment: "பணம் செலுத்துதல்",
@@ -334,6 +337,7 @@ const translations = {
         confirmRemove: "从购物车中删除此项目？",
         customizationOptions: "定制选项",
         saveAdd: "保存并添加到购物车",
+        addonsSelected: "已选配料：",
         
         // Payment
         payment: "付款",
