@@ -646,16 +646,42 @@
             const paymentTitle = document.getElementById('paymentTitle');
             
             try {
-                if (currentLang === 'en') {
-                    paymentTitle.innerHTML = '<img src="pmfont.png" alt="Payment Method">';
-                } else if (currentLang === 'ms') {
-                    paymentTitle.innerHTML = '<img src="carapembayaranfont.png" alt="Payment Method">';
-                } else {
-                    paymentTitle.textContent = 'Payment';
+                // English & Malay: Use IMAGE fonts
+                if (currentLang === 'en' || currentLang === 'ms') {
+                    const imageSrc = (currentLang === 'ms') ? 'carapembayaranfont.png' : 'pmfont.png';
+                    
+                    const img = document.createElement('img');
+                    img.src = imageSrc;
+                    img.alt = 'Payment Method';
+                    img.style.cssText = 'height: 30px; width: auto; object-fit: contain; display: block;';
+                    
+                    img.onerror = function() {
+                        console.error('Failed to load payment title image:', imageSrc);
+                        paymentTitle.textContent = t('payment');
+                        paymentTitle.style.color = '#ffffff';
+                        paymentTitle.style.fontSize = '24px';
+                        paymentTitle.style.fontWeight = 'bold';
+                        paymentTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+                    };
+                    
+                    paymentTitle.innerHTML = '';
+                    paymentTitle.appendChild(img);
+                } 
+                // Tamil & Chinese: Use TEXT translations
+                else {
+                    paymentTitle.textContent = t('payment');
+                    paymentTitle.style.color = '#ffffff';
+                    paymentTitle.style.fontSize = '24px';
+                    paymentTitle.style.fontWeight = 'bold';
+                    paymentTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
                 }
             } catch (error) {
                 console.log('Error updating payment title:', error);
-                paymentTitle.textContent = 'Payment';
+                paymentTitle.textContent = t('payment');
+                paymentTitle.style.color = '#ffffff';
+                paymentTitle.style.fontSize = '24px';
+                paymentTitle.style.fontWeight = 'bold';
+                paymentTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
             }
         }
 
