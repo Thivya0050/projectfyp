@@ -56,6 +56,51 @@
             position: relative;
         }
 
+        /* Notification Badge */
+        .notification-badge {
+            position: absolute;
+            top: 15px;
+            right: 40px;
+            background-color: #f7b817;
+            color: #362315;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: none;
+            max-width: 350px;
+            animation: slideInRight 0.4s ease-out;
+            z-index: 100;
+        }
+
+        .notification-badge.show {
+            display: block;
+        }
+
+        .notification-badge-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            opacity: 0.8;
+        }
+
+        .notification-badge-content {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         /* Customize Container */
         .customize-container {
             background-image: url('wood.png');
@@ -85,7 +130,7 @@
         }
 
         .header-title img {
-            height: 38px;
+            height: 42px;
             width: auto;
             object-fit: contain;
             display: block;
@@ -98,7 +143,7 @@
         }
 
         .logo {
-            height: 70%;
+            height: 60%;
             width: auto;
             object-fit: contain;
         }
@@ -342,102 +387,119 @@
             }
 
             .header-section {
-                height: 11vh;
-                padding: 12px 40px;
+                height: 8vh;
+                padding: 8px 40px;
+            }
+
+            .notification-badge {
+                top: 8px;
+                right: 40px;
+                padding: 10px 16px;
+                font-size: 14px;
+                max-width: 320px;
+            }
+
+            .notification-badge-title {
+                font-size: 12px;
+                margin-bottom: 4px;
+            }
+
+            .notification-badge-content {
+                font-size: 14px;
             }
 
             .content-section {
-                padding: 15px 50px;
+                padding: 8px 40px;
             }
 
             .content-container {
-                gap: 12px;
+                gap: 8px;
             }
 
             .item-card {
-                padding: 15px 30px;
-                gap: 25px;
+                padding: 10px 20px;
+                gap: 18px;
             }
 
             .item-image-container {
-                width: 140px;
-                height: 140px;
+                width: 110px;
+                height: 110px;
             }
 
             .item-name {
-                font-size: 22px;
+                font-size: 19px;
             }
 
             .item-price {
-                font-size: 28px;
+                font-size: 23px;
             }
 
             .customization-header {
-                padding: 10px 30px;
-                font-size: 18px;
+                padding: 8px 20px;
+                font-size: 16px;
             }
 
             .customization-body {
-                padding: 10px 30px;
+                padding: 8px 20px;
             }
 
             .customization-option {
-                padding: 8px 0;
+                padding: 5px 0;
             }
 
             .option-label {
-                font-size: 17px;
-            }
-
-            .option-price {
                 font-size: 15px;
             }
 
+            .option-price {
+                font-size: 13px;
+            }
+
             .option-qty-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 22px;
+                width: 34px;
+                height: 34px;
+                font-size: 18px;
             }
 
             .option-qty-display {
-                font-size: 19px;
-                min-width: 34px;
+                font-size: 16px;
+                min-width: 28px;
             }
 
             .footer-section {
-                padding: 12px 50px 15px 50px;
+                padding: 8px 40px 12px 40px;
             }
 
             .button-container {
-                gap: 25px;
+                gap: 20px;
             }
 
             .back-button {
-                padding: 18px 45px;
-                font-size: 22px;
-                flex: 0 0 200px;
+                padding: 16px 35px;
+                font-size: 19px;
+                flex: 0 0 170px;
             }
 
             .pay-button {
-                padding: 18px 45px;
-                font-size: 22px;
+                padding: 16px 35px;
+                font-size: 19px;
             }
         }
 
         /* Tablet responsive */
         @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) {
             .customize-container {
-                border-radius: 25px;
-                padding: 25px 140px;
-                min-width: 350px;
+                border-radius: 18px;
+                padding: 15px 85px;
+                min-width: 280px;
             }
 
             .header-title {
-                min-height: 48px;
+                min-height: 35px;
             }
 
             .header-title img {
-                height: 48px;
+                height: 35px;
             }
         }
 
@@ -449,11 +511,11 @@
             }
 
             .header-title {
-                min-height: 38px;
+                min-height: 42px;
             }
 
             .header-title img {
-                height: 38px;
+                height: 42px;
             }
 
             .content-section {
@@ -506,11 +568,11 @@
             }
 
             .header-title {
-                min-height: 30px;
+                min-height: 32px;
             }
 
             .header-title img {
-                height: 30px;
+                height: 32px;
             }
 
             .content-section {
@@ -554,6 +616,11 @@
         </div>
         <div class="customize-container">
             <div class="header-title" id="customizeTitle" data-translate="customize">Customize</div>
+        </div>
+        <!-- Notification Badge -->
+        <div class="notification-badge" id="notificationBadge">
+            <div class="notification-badge-title">Add-ons Selected:</div>
+            <div class="notification-badge-content" id="notificationContent"></div>
         </div>
     </div>
 
@@ -667,6 +734,9 @@
 
             // Load customizations
             renderCustomizations();
+            
+            // Update badge with any existing customizations
+            updateNotificationBadge();
         }
 
         // Render customization options
@@ -706,11 +776,43 @@
             }).join('');
         }
 
+        // Update notification badge
+        function updateNotificationBadge() {
+            const badge = document.getElementById('notificationBadge');
+            const content = document.getElementById('notificationContent');
+            const currentLang = localStorage.getItem('kioskLanguage') || 'en';
+            
+            // Collect all selected add-ons
+            let selectedAddons = [];
+            defaultCustomizations.forEach(option => {
+                const qty = customizationQuantities[option.id] || 0;
+                if (qty > 0) {
+                    let optionName = option.name;
+                    
+                    // Get translated name
+                    if (currentLang === 'ms') optionName = option.name_ms;
+                    else if (currentLang === 'ta') optionName = option.name_ta;
+                    else if (currentLang === 'zh') optionName = option.name_zh;
+                    
+                    selectedAddons.push(qty > 1 ? `${optionName} x${qty}` : optionName);
+                }
+            });
+            
+            // Show or hide badge
+            if (selectedAddons.length > 0) {
+                content.textContent = selectedAddons.join(', ');
+                badge.classList.add('show');
+            } else {
+                badge.classList.remove('show');
+            }
+        }
+
         // Increase option quantity
         function increaseOptionQty(optionId) {
             customizationQuantities[optionId]++;
             document.getElementById('qty_' + optionId).textContent = customizationQuantities[optionId];
             updatePrice();
+            updateNotificationBadge();
             console.log(`${optionId} quantity increased to:`, customizationQuantities[optionId]);
         }
 
@@ -720,6 +822,7 @@
                 customizationQuantities[optionId]--;
                 document.getElementById('qty_' + optionId).textContent = customizationQuantities[optionId];
                 updatePrice();
+                updateNotificationBadge();
                 console.log(`${optionId} quantity decreased to:`, customizationQuantities[optionId]);
             }
         }
