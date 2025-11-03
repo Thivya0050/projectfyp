@@ -58,37 +58,33 @@
 
         /* Payment Success Container */
         .payment-success-container {
-            background-image: url('wood.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-radius: 20px;
-            padding: 35px 120px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 300px;
+            display: none; /* Hidden - title container removed */
         }
 
         .logo-container {
-            height: 100%;
-            display: flex;
-            align-items: center;
+            display: none; /* Hidden - logo removed */
         }
 
         .logo {
-            height: 85%;
-            width: auto;
-            object-fit: contain;
+            display: none;
         }
 
         .header-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 45px;
             color: white;
             font-size: 28px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
+        }
+
+        .header-title img {
+            height: 42px;
+            width: auto;
+            object-fit: contain;
         }
 
         /* Main Content - Samsung Tab A8 Optimized */
@@ -176,6 +172,7 @@
             font-size: 16px;
             font-weight: bold;
             z-index: 1000;
+            display: none; /* Hidden - timer removed */
         }
 
         /* Samsung A8 Tablet Optimization - 1920x1200 */
@@ -191,14 +188,17 @@
             }
 
             .payment-success-container {
-                border-radius: 25px;
-                padding: 40px 140px;
-                min-width: 350px;
+                border-radius: 18px;
+                padding: 15px 85px;
+                min-width: 280px;
             }
 
             .header-title {
-                font-size: 28px;
-                letter-spacing: 2px;
+                min-height: 35px;
+            }
+
+            .header-title img {
+                height: 35px;
             }
 
             .main-content {
@@ -249,12 +249,16 @@
         @media (max-width: 1024px) {
             .payment-success-container {
                 border-radius: 22px;
-                padding: 32px 100px;
+                padding: 20px 100px;
                 min-width: 280px;
             }
 
             .header-title {
-                font-size: 24px;
+                min-height: 42px;
+            }
+
+            .header-title img {
+                height: 42px;
             }
             
             .thank-you-message {
@@ -283,12 +287,16 @@
 
             .payment-success-container {
                 border-radius: 18px;
-                padding: 25px 60px;
+                padding: 18px 60px;
                 min-width: 200px;
             }
             
             .header-title {
-                font-size: 20px;
+                min-height: 32px;
+            }
+
+            .header-title img {
+                height: 32px;
             }
             
             .thank-you-message {
