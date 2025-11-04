@@ -22,7 +22,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
     
-    <title>Payment - Ali, Muthu & Ah Hock</title>
+    <title>Customize Item - Ali, Muthu & Ah Hock</title>
     <style>
         * {
             margin: 0;
@@ -41,7 +41,7 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
-            background-color: #F5F5DC;
+            background-color: #efebce;
         }
 
         /* Header Section with Logo */
@@ -56,32 +56,84 @@
             position: relative;
         }
 
-        /* Payment Container */
-        .payment-container {
+        /* Notification Badge */
+        .notification-badge {
+            position: absolute;
+            top: 15px;
+            right: 40px;
+            background-color: #f7b817;
+            color: #362315;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: none;
+            max-width: 350px;
+            animation: slideInRight 0.4s ease-out;
+            z-index: 100;
+        }
+
+        .notification-badge.show {
+            display: block;
+        }
+
+        .notification-badge-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            opacity: 0.8;
+        }
+
+        .notification-badge-content {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Customize Container */
+        .customize-container {
             background-image: url('wood.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            border-radius: 18px;
-            padding: 15px 70px;
+            border-radius: 20px;
+            padding: 20px 90px;
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            min-width: 260px;
+            min-width: 350px;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .header-title {
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 30px;
+            width: 100%;
+            height: 100%;
+            min-height: 45px;
         }
 
         .header-title img {
-            height: 30px;
+            height: 42px;
             width: auto;
             object-fit: contain;
+            display: block;
         }
 
         .logo-container {
@@ -96,196 +148,220 @@
             object-fit: contain;
         }
 
-        /* Main Content - Samsung Tab A8 Optimized */
-        .main-content {
+        /* Main Content Section */
+        .content-section {
             flex: 1;
             width: 100%;
-            padding: 25px 40px;
+            padding: 12px 40px;
             overflow: hidden;
-            background-color: #F5F5DC;
+            background-color: #efebce;
+        }
+
+        .content-container {                              
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 30px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Payment Methods Grid - Samsung Tab A8 Optimized */
-        .payment-methods {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-            width: 100%;
-            height: 280px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .payment-method {
-            background-color: #4A2C1A;
-            border: 2px solid #8B4513;
-            border-radius: 12px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            gap: 12px;
             height: 100%;
-            position: relative;
         }
 
-        .payment-method:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-            border-color: #FDB913;
-        }
-
-        .payment-method.selected {
-            border: 3px solid #FDB913;
-            background-color: #5D4037;
-        }
-
-        .payment-method img {
-            max-width: 100px;
-            max-height: 80px;
-            object-fit: contain;
-        }
-
-        .payment-icon {
-            font-size: 80px;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        /* Order Summary Card - Samsung Tab A8 Optimized */
-        .order-summary {
-            background-color: white;
-            border-radius: 15px;
-            padding: 0;
-            max-width: 600px;
-            margin: 0 auto;
-            width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
+        /* Item Display Card */
+        .item-card {
+            background-color: #ffffff;
+            border-radius: 25px;
+            padding: 18px 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
             flex-shrink: 0;
         }
 
-        .summary-header {
-            background-color: #4A2C1A;
-            color: white;
-            padding: 12px 20px;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
+        .item-image-container {
+            background-color: #f5f5f5;
+            border-radius: 20px;
+            width: 160px;
+            height: 160px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
-        .summary-content {
-            padding: 15px;
+        .item-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .summary-items {
+        .item-info {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 6px 0;
-            font-size: 14px;
         }
 
         .item-name {
-            font-weight: 600;
-            color: #333;
+            font-size: 22px;
+            font-weight: bold;
+            color: #000000;
+            text-align: center;
         }
 
         .item-price {
+            font-size: 28px;
             font-weight: bold;
             color: #bf8a47;
         }
 
-        .summary-divider {
-            height: 2px;
-            background: #FDB913;
-            margin: 12px 0;
-        }
-
-        .summary-total {
+        /* Customization Options Card */
+        .customization-card {
+            background-color: #ffffff;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            flex: 1;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
+            flex-direction: column;
+            min-height: 0;
         }
 
-        .total-label {
+        .customization-header {
+            background-color: #362315;
+            color: white;
+            padding: 12px 30px;
+            font-size: 19px;
+            font-weight: bold;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .customization-body {
+            padding: 12px 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            overflow: hidden;
+        }
+
+        .customization-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .customization-option:last-child {
+            border-bottom: none;
+        }
+
+        .option-label {
+            font-size: 17px;
+            font-weight: 600;
+            color: #000000;
+            flex: 1;
+        }
+
+        .option-price {
+            font-size: 15px;
+            color: #666666;
+            margin-right: 12px;
+        }
+
+        /* Quantity Controls for Options */
+        .option-quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-qty-btn {
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 8px;
+            background-color: #362315;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-qty-btn:hover {
+            background-color: #4a3020;
+            transform: scale(1.1);
+        }
+
+        .option-qty-btn:active {
+            transform: scale(0.95);
+        }
+
+        .option-qty-display {
             font-size: 18px;
             font-weight: bold;
-            color: #bf8a47;
-            text-transform: uppercase;
+            color: #362315;
+            min-width: 32px;
+            text-align: center;
         }
 
-        .total-amount {
-            font-size: 20px;
-            font-weight: bold;
-            color: #bf8a47;
-        }
-
-        /* Footer Buttons - Samsung Tab A8 Optimized */
+        /* Footer Buttons Section */
         .footer-section {
-            background-color: #F5F5DC;
+            background-color: #efebce;
             width: 100%;
-            padding: 10px 30px 15px 30px;
+            padding: 12px 40px 15px 40px;
             flex-shrink: 0;
         }
 
         .button-container {
-            max-width: 800px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            gap: 20px;
+            gap: 25px;
         }
 
         .back-button {
-            background-color: #4A2C1A;
+            background-color: #362315;
             color: white;
             border: none;
-            border-radius: 15px;
-            padding: 18px 40px;
-            font-size: 20px;
+            border-radius: 20px;
+            padding: 16px 40px;
+            font-size: 21px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            flex: 0 0 180px;
+            flex: 0 0 200px;
         }
 
         .back-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
-            background-color: #5D4037;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+            background-color: #4a3020;
         }
 
         .pay-button {
-            background-color: #FDB913;
+            background-color: #f7b817;
             color: #362315;
             border: none;
-            border-radius: 15px;
-            padding: 18px 40px;
-            font-size: 20px;
+            border-radius: 20px;
+            padding: 16px 40px;
+            font-size: 21px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -294,15 +370,8 @@
 
         .pay-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
             background-color: #ffca28;
-        }
-
-        .pay-button:disabled {
-            background-color: #cccccc;
-            color: #666666;
-            cursor: not-allowed;
-            transform: none;
         }
 
         .back-button:active,
@@ -310,7 +379,6 @@
             transform: translateY(0);
         }
 
-        /* Responsive Design */
         /* Samsung A8 Tablet Portrait Mode - 1200x1920 */
         @media (max-width: 1200px) and (min-height: 1900px) and (orientation: portrait) {
             body {
@@ -319,14 +387,16 @@
             }
 
             .header-section {
-                height: 8vh;
-                padding: 8px 30px;
+                height: 6vh;
+                padding: 5px 25px;
             }
 
-            .payment-container {
-                border-radius: 16px;
-                padding: 12px 60px;
-                min-width: 220px;
+            .logo {
+                height: 55%;
+            }
+
+            .customize-container {
+                padding: 12px 55px;
             }
 
             .header-title {
@@ -334,86 +404,120 @@
             }
 
             .header-title img {
-                height: 28px;
+                height: 26px;
             }
 
-            .main-content {
-                padding: 12px 30px;
-                gap: 15px;
+            .notification-badge {
+                top: 6px;
+                right: 25px;
+                padding: 6px 12px;
+                font-size: 10px;
+                max-width: 240px;
+                border-radius: 10px;
             }
 
-            .payment-methods {
-                max-width: 500px;
-                height: 200px;
-                gap: 12px;
+            .notification-badge-title {
+                font-size: 9px;
+                margin-bottom: 2px;
             }
 
-            .order-summary {
-                max-width: 500px;
+            .notification-badge-content {
+                font-size: 10px;
+                line-height: 1.3;
             }
 
-            .summary-header {
+            .content-section {
+                padding: 6px 25px;
+            }
+
+            .content-container {
+                gap: 6px;
+            }
+
+            .item-card {
                 padding: 8px 15px;
-                font-size: 15px;
+                gap: 12px;
+                border-radius: 18px;
             }
 
-            .summary-content {
-                padding: 10px;
+            .item-image-container {
+                width: 80px;
+                height: 80px;
+                border-radius: 15px;
             }
 
-            .summary-items {
-                gap: 5px;
-                margin-bottom: 8px;
+            .item-info {
+                gap: 6px;
             }
 
-            .summary-item {
-                padding: 4px 0;
-                font-size: 13px;
+            .item-name {
+                font-size: 14px;
             }
 
-            .summary-total {
-                padding: 5px 0;
-            }
-
-            .total-label {
-                font-size: 16px;
-            }
-
-            .total-amount {
+            .item-price {
                 font-size: 18px;
             }
 
-            .payment-method {
-                padding: 12px;
-                min-height: 90px;
+            .customization-card {
+                border-radius: 18px;
             }
 
-            .payment-method img {
-                max-width: 70px;
-                max-height: 50px;
+            .customization-header {
+                padding: 6px 15px;
+                font-size: 13px;
             }
 
-            .payment-icon {
-                font-size: 50px;
+            .customization-body {
+                padding: 6px 15px;
+            }
+
+            .customization-option {
+                padding: 3px 0;
+            }
+
+            .option-label {
+                font-size: 12px;
+            }
+
+            .option-price {
+                font-size: 10px;
+                margin-right: 8px;
+            }
+
+            .option-quantity-controls {
+                gap: 7px;
+            }
+
+            .option-qty-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 14px;
+            }
+
+            .option-qty-display {
+                font-size: 13px;
+                min-width: 22px;
             }
 
             .footer-section {
-                padding: 8px 30px 12px 30px;
+                padding: 6px 25px 8px 25px;
             }
 
             .button-container {
-                gap: 15px;
+                gap: 12px;
             }
 
             .back-button {
-                padding: 14px 30px;
-                font-size: 17px;
-                flex: 0 0 140px;
+                padding: 12px 25px;
+                font-size: 15px;
+                flex: 0 0 120px;
+                border-radius: 15px;
             }
 
             .pay-button {
-                padding: 14px 30px;
-                font-size: 17px;
+                padding: 12px 25px;
+                font-size: 15px;
+                border-radius: 15px;
             }
         }
 
@@ -425,14 +529,16 @@
             }
 
             .header-section {
-                height: 8vh;
-                padding: 8px 40px;
+                height: 7vh;
+                padding: 6px 35px;
             }
 
-            .payment-container {
-                border-radius: 16px;
-                padding: 12px 65px;
-                min-width: 240px;
+            .logo {
+                height: 55%;
+            }
+
+            .customize-container {
+                padding: 14px 65px;
             }
 
             .header-title {
@@ -440,94 +546,129 @@
             }
 
             .header-title img {
-                height: 30px;
+                height: 28px;
             }
 
-            .main-content {
-                padding: 15px 40px;
-                gap: 20px;
+            .notification-badge {
+                top: 7px;
+                right: 35px;
+                padding: 8px 14px;
+                font-size: 12px;
+                max-width: 280px;
+                border-radius: 11px;
             }
 
-            .payment-methods {
-                max-width: 650px;
-                height: 280px;
-                gap: 18px;
+            .notification-badge-title {
+                font-size: 10px;
+                margin-bottom: 3px;
             }
 
-            .order-summary {
-                max-width: 650px;
+            .notification-badge-content {
+                font-size: 12px;
+                line-height: 1.3;
             }
 
-            .summary-header {
-                padding: 10px 18px;
-                font-size: 17px;
+            .content-section {
+                padding: 7px 35px;
             }
 
-            .summary-content {
-                padding: 12px;
+            .content-container {
+                gap: 7px;
             }
 
-            .summary-items {
-                gap: 6px;
-                margin-bottom: 10px;
+            .item-card {
+                padding: 9px 18px;
+                gap: 16px;
+                border-radius: 20px;
             }
 
-            .summary-item {
-                padding: 5px 0;
+            .item-image-container {
+                width: 90px;
+                height: 90px;
+                border-radius: 16px;
+            }
+
+            .item-info {
+                gap: 7px;
+            }
+
+            .item-name {
+                font-size: 16px;
+            }
+
+            .item-price {
+                font-size: 20px;
+            }
+
+            .customization-card {
+                border-radius: 20px;
+            }
+
+            .customization-header {
+                padding: 7px 18px;
                 font-size: 14px;
             }
 
-            .summary-total {
-                padding: 6px 0;
+            .customization-body {
+                padding: 7px 18px;
             }
 
-            .total-label {
-                font-size: 17px;
+            .customization-option {
+                padding: 4px 0;
             }
 
-            .total-amount {
-                font-size: 19px;
+            .option-label {
+                font-size: 13px;
             }
 
-            .payment-method {
-                padding: 18px;
-                min-height: 125px;
+            .option-price {
+                font-size: 11px;
+                margin-right: 10px;
             }
 
-            .payment-method img {
-                max-width: 90px;
-                max-height: 70px;
+            .option-quantity-controls {
+                gap: 8px;
             }
 
-            .payment-icon {
-                font-size: 70px;
+            .option-qty-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+
+            .option-qty-display {
+                font-size: 14px;
+                min-width: 24px;
             }
 
             .footer-section {
-                padding: 8px 40px 12px 40px;
+                padding: 7px 35px 10px 35px;
             }
 
             .button-container {
-                gap: 20px;
+                gap: 16px;
             }
 
             .back-button {
-                padding: 16px 35px;
-                font-size: 19px;
-                flex: 0 0 170px;
+                padding: 14px 30px;
+                font-size: 17px;
+                flex: 0 0 145px;
+                border-radius: 16px;
             }
 
             .pay-button {
-                padding: 16px 35px;
-                font-size: 19px;
+                padding: 14px 30px;
+                font-size: 17px;
+                border-radius: 16px;
             }
         }
 
-        @media (max-width: 1024px) {
-            .payment-container {
+        /* Tablet responsive */
+        @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) {
+            .customize-container {
                 border-radius: 18px;
-                padding: 16px 80px;
-                min-width: 250px;
+                padding: 15px 85px;
+                min-width: 280px;
             }
 
             .header-title {
@@ -539,44 +680,103 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .main-content {
-                padding: 20px 25px;
-                gap: 25px;
-            }
-
-            .payment-container {
-                border-radius: 16px;
-                padding: 14px 50px;
-                min-width: 180px;
+        @media (max-width: 1024px) {
+            .customize-container {
+                border-radius: 22px;
+                padding: 20px 100px;
+                min-width: 280px;
             }
 
             .header-title {
-                min-height: 28px;
+                min-height: 42px;
             }
 
             .header-title img {
-                height: 28px;
+                height: 42px;
             }
 
-            .payment-methods {
-                grid-template-columns: 1fr;
+            .content-section {
+                overflow-y: auto;
+            }
+
+            .item-card {
+                flex-direction: column;
                 gap: 15px;
-                max-width: 400px;
-                height: auto;
             }
 
-            .payment-method {
-                min-height: 120px;
-                padding: 30px 20px;
+            .item-image-container {
+                width: 240px;
+                height: 240px;
             }
 
-            .order-summary {
-                max-width: 400px;
+            .item-name {
+                font-size: 22px;
+            }
+
+            .item-price {
+                font-size: 28px;
+            }
+
+            .option-label {
+                font-size: 18px;
+            }
+
+            .option-qty-btn {
+                width: 38px;
+                height: 38px;
+            }
+
+            .option-qty-display {
+                font-size: 19px;
+            }
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .header-section {
+                height: 12vh;
+                padding: 15px 40px;
+            }
+
+            .customize-container {
+                border-radius: 18px;
+                padding: 18px 60px;
+                min-width: 200px;
+            }
+
+            .header-title {
+                min-height: 32px;
+            }
+
+            .header-title img {
+                height: 32px;
+            }
+
+            .content-section {
+                padding: 15px 20px;
+                overflow-y: auto;
+            }
+
+            .item-card {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .item-image-container {
+                width: 200px;
+                height: 200px;
+            }
+
+            .customization-option {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
             }
 
             .button-container {
                 flex-direction: column;
+                gap: 15px;
             }
 
             .back-button {
@@ -591,40 +791,37 @@
         <div class="logo-container">
             <img src="logo old.png" alt="Ali, Muthu & Ah Hock" class="logo">
         </div>
-        <div class="payment-container">
-            <div class="header-title" id="paymentTitle" data-translate="payment">Payment</div>
+        <div class="customize-container">
+            <div class="header-title" id="customizeTitle" data-translate="customize">Customize</div>
+        </div>
+        <!-- Notification Badge -->
+        <div class="notification-badge" id="notificationBadge">
+            <div class="notification-badge-title" data-translate="addonsSelected">Add-ons Selected:</div>
+            <div class="notification-badge-content" id="notificationContent"></div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="main-content">
-        <!-- Payment Methods -->
-        <div class="payment-methods">
-            <div class="payment-method" data-method="card" onclick="selectPaymentMethod('card')">
-                <img src="card.png" alt="Card Payment" style="max-width: 100px;">
-            </div>
-            <div class="payment-method" data-method="touchngo" onclick="selectPaymentMethod('touchngo')">
-                <img src="touch N Go.png" alt="Touch 'n Go" style="max-width: 100px;">
-            </div>
-            <div class="payment-method" data-method="cash" onclick="selectPaymentMethod('cash')">
-                <div class="payment-icon">💵</div>
-            </div>
-            <div class="payment-method" data-method="qr" onclick="selectPaymentMethod('qr')">
-                <img src="qr.png" alt="QR Code" style="max-width: 100px;">
-            </div>
-        </div>
-
-        <!-- Order Summary -->
-        <div class="order-summary">
-            <div class="summary-header" data-translate="orderSummary">Order Summary</div>
-            <div class="summary-content">
-                <div class="summary-items" id="summaryItems">
-                    <!-- Items will be loaded here -->
+    <div class="content-section">
+        <div class="content-container">
+            <!-- Item Display Card -->
+            <div class="item-card">
+                <div class="item-image-container">
+                    <img src="placeholder.png" alt="Item" class="item-image" id="itemImage">
                 </div>
-                <div class="summary-divider"></div>
-                <div class="summary-total">
-                    <div class="total-label" data-translate="total">Total</div>
-                    <div class="total-amount" id="totalAmount">RM 0.00</div>
+                <div class="item-info">
+                    <div class="item-name" id="itemName">Item Name</div>
+                    <div class="item-price" id="itemPrice">RM 0.00</div>
+                </div>
+            </div>
+
+            <!-- Customization Options Card -->
+            <div class="customization-card">
+                <div class="customization-header" data-translate="customizationOptions">
+                    CUSTOMIZATION OPTIONS
+                </div>
+                <div class="customization-body" id="customizationOptions">
+                    <!-- Customization options will be dynamically inserted here -->
                 </div>
             </div>
         </div>
@@ -634,182 +831,366 @@
     <div class="footer-section">
         <div class="button-container">
             <button class="back-button" onclick="goBack()" data-translate="back">BACK</button>
-            <button class="pay-button" id="payButton" onclick="processPayment()" data-translate="payHere">PAY HERE</button>
+            <button class="pay-button" onclick="saveCustomization()" data-translate="saveAdd">SAVE & ADD TO CART</button>
         </div>
     </div>
 
     <!-- Translation System -->
     <script src="translations.js"></script>
-    
-    <script>
-        let selectedPaymentMethod = null;
-        let cartItems = [];
-        let totalAmount = 0;
 
-        // Load cart and display order summary
-        function loadOrderSummary() {
-            console.log('Loading order summary...');
+    <script>
+        // Get item data from URL parameters or localStorage
+        let currentItem = null;
+        let customizationQuantities = {}; // Track quantity for each option
+        let basePrice = 0;
+        let isEditingCartItem = false; // Track if we're editing an existing cart item
+        let editingCartIndex = -1; // Index of item being edited
+
+        // Default customization options (can be customized per item)
+        const defaultCustomizations = [
+            { id: 'extra_spicy', name: 'Extra Spicy', name_ms: 'Lebih Pedas', name_ta: 'மிகவும் காரமான', name_zh: '额外辣', price: 0 },
+            { id: 'less_spicy', name: 'Less Spicy', name_ms: 'Kurang Pedas', name_ta: 'குறைவான காரம்', name_zh: '少辣', price: 0 },
+            { id: 'no_spicy', name: 'No Spicy', name_ms: 'Tidak Pedas', name_ta: 'காரம் வேண்டாம்', name_zh: '不辣', price: 0 },
+            { id: 'extra_egg', name: 'Extra Egg', name_ms: 'Tambah Telur', name_ta: 'கூடுதல் முட்டை', name_zh: '加鸡蛋', price: 1.50 },
+            { id: 'extra_chicken', name: 'Extra Chicken', name_ms: 'Tambah Ayam', name_ta: 'கூடுதல் கோழி', name_zh: '加鸡肉', price: 3.00 },
+            { id: 'no_onions', name: 'No Onions', name_ms: 'Tanpa Bawang', name_ta: 'வெங்காயம் வேண்டாம்', name_zh: '不要洋葱', price: 0 }
+        ];
+
+        // Load item data
+        function loadItemData() {
+            // Try to get from localStorage first
+            const customizeData = localStorage.getItem('customize_item');
             
+            if (customizeData) {
+                currentItem = JSON.parse(customizeData);
+                
+                // Check if we're editing an existing cart item
+                if (currentItem.cartIndex !== undefined && currentItem.cartIndex >= 0) {
+                    isEditingCartItem = true;
+                    editingCartIndex = currentItem.cartIndex;
+                    console.log('Editing existing cart item at index:', editingCartIndex);
+                    
+                    // Load existing customizations from cart item
+                    if (currentItem.customizations && Array.isArray(currentItem.customizations)) {
+                        currentItem.customizations.forEach(custom => {
+                            if (custom.id && custom.quantity) {
+                                customizationQuantities[custom.id] = custom.quantity;
+                                console.log('Loaded customization:', custom.id, '= qty', custom.quantity);
+                            }
+                        });
+                    }
+                }
+            } else {
+                // Fallback to default
+                currentItem = {
+                    name: 'Sample Item',
+                    price: 10.00,
+                    image: 'placeholder.png'
+                };
+            }
+
+            // Display item - show base name without customizations
+            let displayName = currentItem.name;
+            if (isEditingCartItem) {
+                // Remove customization text in parentheses for display
+                displayName = displayName.replace(/\s*\([^)]*\)\s*$/, '').trim();
+            }
+            document.getElementById('itemName').textContent = displayName;
+            document.getElementById('itemImage').src = currentItem.image || 'placeholder.png';
+            
+            // Use basePrice if available (when editing), otherwise use price (when adding new)
+            if (currentItem.basePrice !== undefined) {
+                basePrice = parseFloat(currentItem.basePrice);
+                console.log('Using stored base price:', basePrice);
+            } else {
+                basePrice = parseFloat(currentItem.price) || 0;
+                console.log('Using price as base price:', basePrice);
+            }
+            
+            updatePrice();
+
+            // Load customizations
+            renderCustomizations();
+            
+            // Update badge with any existing customizations
+            updateNotificationBadge();
+        }
+
+        // Render customization options
+        function renderCustomizations() {
+            const container = document.getElementById('customizationOptions');
+            const currentLang = localStorage.getItem('kioskLanguage') || 'en';
+            
+            // Initialize quantities to 0
+            defaultCustomizations.forEach(option => {
+                if (customizationQuantities[option.id] === undefined) {
+                    customizationQuantities[option.id] = 0;
+                }
+            });
+            
+            container.innerHTML = defaultCustomizations.map(option => {
+                let optionName = option.name;
+                
+                // Get translated name
+                if (currentLang === 'ms') optionName = option.name_ms;
+                else if (currentLang === 'ta') optionName = option.name_ta;
+                else if (currentLang === 'zh') optionName = option.name_zh;
+                
+                const priceText = option.price > 0 ? `+RM ${option.price.toFixed(2)}` : t('free');
+                const qty = customizationQuantities[option.id] || 0;
+                
+                return `
+                    <div class="customization-option">
+                        <div class="option-label">${optionName}</div>
+                        <div class="option-price">${priceText}</div>
+                        <div class="option-quantity-controls">
+                            <button class="option-qty-btn" onclick="decreaseOptionQty('${option.id}')">−</button>
+                            <div class="option-qty-display" id="qty_${option.id}">${qty}</div>
+                            <button class="option-qty-btn" onclick="increaseOptionQty('${option.id}')">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Update notification badge
+        function updateNotificationBadge() {
+            const badge = document.getElementById('notificationBadge');
+            const content = document.getElementById('notificationContent');
+            const currentLang = localStorage.getItem('kioskLanguage') || 'en';
+            
+            // Collect all selected add-ons
+            let selectedAddons = [];
+            defaultCustomizations.forEach(option => {
+                const qty = customizationQuantities[option.id] || 0;
+                if (qty > 0) {
+                    let optionName = option.name;
+                    
+                    // Get translated name
+                    if (currentLang === 'ms') optionName = option.name_ms;
+                    else if (currentLang === 'ta') optionName = option.name_ta;
+                    else if (currentLang === 'zh') optionName = option.name_zh;
+                    
+                    selectedAddons.push(qty > 1 ? `${optionName} x${qty}` : optionName);
+                }
+            });
+            
+            // Show or hide badge
+            if (selectedAddons.length > 0) {
+                content.textContent = selectedAddons.join(', ');
+                badge.classList.add('show');
+            } else {
+                badge.classList.remove('show');
+            }
+        }
+
+        // Increase option quantity
+        function increaseOptionQty(optionId) {
+            customizationQuantities[optionId]++;
+            document.getElementById('qty_' + optionId).textContent = customizationQuantities[optionId];
+            updatePrice();
+            updateNotificationBadge();
+            console.log(`${optionId} quantity increased to:`, customizationQuantities[optionId]);
+        }
+
+        // Decrease option quantity
+        function decreaseOptionQty(optionId) {
+            if (customizationQuantities[optionId] > 0) {
+                customizationQuantities[optionId]--;
+                document.getElementById('qty_' + optionId).textContent = customizationQuantities[optionId];
+                updatePrice();
+                updateNotificationBadge();
+                console.log(`${optionId} quantity decreased to:`, customizationQuantities[optionId]);
+            }
+        }
+
+        // Update total price
+        function updatePrice() {
+            let customizationTotal = 0;
+            
+            // Calculate total from all options with quantities
+            defaultCustomizations.forEach(option => {
+                const qty = customizationQuantities[option.id] || 0;
+                customizationTotal += option.price * qty;
+            });
+            
+            const totalPrice = basePrice + customizationTotal;
+            document.getElementById('itemPrice').textContent = `RM ${totalPrice.toFixed(2)}`;
+            console.log('Price updated. Base:', basePrice, 'Customizations:', customizationTotal, 'Total:', totalPrice);
+        }
+
+        // Save customization and add to cart
+        function saveCustomization() {
+            if (!currentItem) {
+                alert(t('errorNoItemData'));
+                return;
+            }
+
+            // Calculate total customization price
+            let customizationTotal = 0;
+            let customizationsList = [];
+            
+            defaultCustomizations.forEach(option => {
+                const qty = customizationQuantities[option.id] || 0;
+                if (qty > 0) {
+                    customizationTotal += option.price * qty;
+                    customizationsList.push({
+                        id: option.id,
+                        name: option.name,
+                        price: option.price,
+                        quantity: qty
+                    });
+                }
+            });
+
+            // Calculate final price
+            const totalPrice = basePrice + customizationTotal;
+
+            console.log('=== SAVING TO CART ===');
+            console.log('Base Price:', basePrice);
+            console.log('Customization Total:', customizationTotal);
+            console.log('Final Price (Base + Customizations):', totalPrice);
+
+            // Load cart
+            let cartItems = [];
             const savedCart = localStorage.getItem('amakiosk_cart');
             if (savedCart) {
                 cartItems = JSON.parse(savedCart);
-                console.log('Cart items:', cartItems);
             }
 
-            const summaryContainer = document.getElementById('summaryItems');
-            
-            if (cartItems.length === 0) {
-                summaryContainer.innerHTML = `<div class="summary-item"><div class="item-name">No items in cart</div></div>`;
-                totalAmount = 0;
+            // Get base item name (remove existing customization text if editing)
+            let baseItemName = currentItem.name;
+            if (isEditingCartItem) {
+                // Remove customization text in parentheses
+                baseItemName = baseItemName.replace(/\s*\([^)]*\)\s*$/, '').trim();
+            }
+
+            // Create customized item name
+            let customizedName = baseItemName;
+            if (customizationsList.length > 0) {
+                const customText = customizationsList.map(c => 
+                    `${c.name}${c.quantity > 1 ? ' x' + c.quantity : ''}`
+                ).join(', ');
+                customizedName = `${baseItemName} (${customText})`;
+            }
+
+            // Preserve quantity if editing existing item
+            let itemQuantity = 1;
+            if (isEditingCartItem && editingCartIndex >= 0 && editingCartIndex < cartItems.length) {
+                itemQuantity = cartItems[editingCartIndex].quantity || 1;
+                console.log('Preserving existing quantity:', itemQuantity);
+            }
+
+            const updatedCartItem = {
+                name: customizedName,
+                price: totalPrice,
+                basePrice: basePrice, // Store base price for future edits
+                image: currentItem.image,
+                quantity: itemQuantity, // Preserve quantity when editing
+                customizations: customizationsList
+            };
+
+            // Update existing item or add new item
+            if (isEditingCartItem && editingCartIndex >= 0 && editingCartIndex < cartItems.length) {
+                // UPDATE existing item
+                cartItems[editingCartIndex] = updatedCartItem;
+                console.log('✅ Updated existing cart item at index:', editingCartIndex);
+                console.log('✅ Updated item:', updatedCartItem);
             } else {
-                summaryContainer.innerHTML = cartItems.map(item => {
-                    const itemTotal = item.price * item.quantity;
-                    return `
-                        <div class="summary-item">
-                            <div class="item-name">${item.name} ${item.quantity > 1 ? 'x ' + item.quantity : ''}</div>
-                            <div class="item-price">RM ${itemTotal.toFixed(2)}</div>
-                        </div>
-                    `;
-                }).join('');
-
-                totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                // ADD new item
+                cartItems.push(updatedCartItem);
+                console.log('✅ Added new item to cart:', updatedCartItem);
             }
 
-            document.getElementById('totalAmount').textContent = `RM ${totalAmount.toFixed(2)}`;
-            console.log('Total amount:', totalAmount);
+            // Save cart
+            localStorage.setItem('amakiosk_cart', JSON.stringify(cartItems));
+            console.log('✅ Cart saved. Total items:', cartItems.length);
+            console.log('✅ Item price: RM ' + totalPrice.toFixed(2));
+
+            // Clear customize data
+            localStorage.removeItem('customize_item');
+
+            // If editing, go back to cart; if adding new, go to menu with success notification
+            if (isEditingCartItem) {
+                console.log('Returning to cart page (was editing)');
+                window.location.href = 'cart-page.html';
+            } else {
+                // Set flag to show success notification on menu page
+                localStorage.setItem('show_add_success', 'true');
+                localStorage.setItem('added_item_name', customizedName);
+                console.log('Returning to menu page (was adding new) - will show success notification');
+                window.location.href = 'new-menu-sample.html';
+            }
         }
 
-        // Select payment method
-        function selectPaymentMethod(method) {
-            console.log('Payment method selected:', method);
-            
-            // Remove selection from all
-            document.querySelectorAll('.payment-method').forEach(el => {
-                el.classList.remove('selected');
-            });
-
-            // Add selection to clicked one
-            document.querySelector(`[data-method="${method}"]`).classList.add('selected');
-            
-            selectedPaymentMethod = method;
-            
-            // Enable pay button
-            document.getElementById('payButton').disabled = false;
-        }
-
-        // Go back to cart
+        // Go back to previous page
         function goBack() {
-            window.location.href = 'cart-page.html';
-        }
-
-        // Process payment
-        function processPayment() {
-            console.log('processPayment function called');
+            localStorage.removeItem('customize_item');
             
-            if (!selectedPaymentMethod) {
-                alert('Please select a payment method');
-                return;
+            // If we were editing, go back to cart; otherwise go to menu
+            if (isEditingCartItem) {
+                window.location.href = 'cart-page.html';
+            } else {
+                window.location.href = 'new-menu-sample.html';
             }
-
-            if (cartItems.length === 0) {
-                alert('Your cart is empty');
-                return;
-            }
-
-            console.log('Processing payment...');
-            console.log('Payment method:', selectedPaymentMethod);
-            console.log('Total amount:', totalAmount);
-
-            // Disable pay button to prevent double clicks
-            const payButton = document.querySelector('.pay-button');
-            if (payButton) {
-                payButton.disabled = true;
-                payButton.textContent = 'PROCESSING...';
-                payButton.style.opacity = '0.6';
-            }
-
-            // Generate order number
-            const orderNumber = Math.floor(Math.random() * 900) + 100; // 100-999
-            
-            // Store order number for success page BEFORE clearing cart
-            localStorage.setItem('lastOrderNumber', orderNumber);
-            localStorage.setItem('lastPaymentMethod', selectedPaymentMethod);
-            
-            console.log('Order number generated:', orderNumber);
-            
-            // Clear cart after successful payment
-            localStorage.removeItem('amakiosk_cart');
-            localStorage.removeItem('kioskCartTotal');
-            
-            // IMMEDIATE REDIRECT - NO DELAYS
-            window.location.replace('payment-success.html');
         }
 
         // Initialize on page load
-        // Update payment title based on language
-        function updatePaymentTitle() {
+        // Update customize title based on language
+        function updateCustomizeTitle() {
             const currentLang = localStorage.getItem('kioskLanguage') || 'en';
-            const paymentTitle = document.getElementById('paymentTitle');
+            const customizeTitle = document.getElementById('customizeTitle');
             
             try {
                 // English & Malay: Use IMAGE fonts
                 if (currentLang === 'en' || currentLang === 'ms') {
-                    const imageSrc = (currentLang === 'ms') ? 'carapembayaranfont.png' : 'pmfont.png';
+                    const imageSrc = (currentLang === 'ms') ? 'ubahsuaifont.png' : 'custfont.png';
                     
                     const img = document.createElement('img');
                     img.src = imageSrc;
-                    img.alt = 'Payment Method';
-                    img.style.cssText = 'height: 30px; width: auto; object-fit: contain; display: block;';
+                    img.alt = 'Customize';
+                    img.style.cssText = 'height: 35px; width: auto; object-fit: contain; display: block;';
                     
                     img.onerror = function() {
-                        console.error('Failed to load payment title image:', imageSrc);
-                        paymentTitle.textContent = t('payment');
-                        paymentTitle.style.color = '#ffffff';
-                        paymentTitle.style.fontSize = '24px';
-                        paymentTitle.style.fontWeight = 'bold';
-                        paymentTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+                        console.error('Failed to load customize title image:', imageSrc);
+                        customizeTitle.textContent = t('customize');
+                        customizeTitle.style.color = '#ffffff';
+                        customizeTitle.style.fontSize = '24px';
+                        customizeTitle.style.fontWeight = 'bold';
+                        customizeTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
                     };
                     
-                    paymentTitle.innerHTML = '';
-                    paymentTitle.appendChild(img);
+                    customizeTitle.innerHTML = '';
+                    customizeTitle.appendChild(img);
                 } 
                 // Tamil & Chinese: Use TEXT translations
                 else {
-                    paymentTitle.textContent = t('payment');
-                    paymentTitle.style.color = '#ffffff';
-                    paymentTitle.style.fontSize = '24px';
-                    paymentTitle.style.fontWeight = 'bold';
-                    paymentTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+                    customizeTitle.textContent = t('customize');
+                    customizeTitle.style.color = '#ffffff';
+                    customizeTitle.style.fontSize = '24px';
+                    customizeTitle.style.fontWeight = 'bold';
+                    customizeTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
                 }
             } catch (error) {
-                console.log('Error updating payment title:', error);
-                paymentTitle.textContent = t('payment');
-                paymentTitle.style.color = '#ffffff';
-                paymentTitle.style.fontSize = '24px';
-                paymentTitle.style.fontWeight = 'bold';
-                paymentTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+                console.error('Error updating customize title:', error);
+                customizeTitle.textContent = t('customize');
+                customizeTitle.style.color = '#ffffff';
+                customizeTitle.style.fontSize = '24px';
+                customizeTitle.style.fontWeight = 'bold';
+                customizeTitle.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
             }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Payment page loaded');
+            loadItemData();
             
-            // Initialize translations safely
-            try {
-                if (typeof updatePageTranslations === 'function') {
-                    updatePageTranslations();
-                }
-            } catch (error) {
-                console.log('Translation system not available, continuing without it');
+            // Update translations
+            if (typeof updatePageTranslations === 'function') {
+                updatePageTranslations();
             }
             
-            // Update payment title based on language
-            updatePaymentTitle();
-            
-            loadOrderSummary();
-            
-            // Disable pay button initially
-            document.getElementById('payButton').disabled = true;
+            // Update customize title based on language
+            updateCustomizeTitle();
         });
     </script>
 </body>
