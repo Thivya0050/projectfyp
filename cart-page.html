@@ -453,12 +453,159 @@
             }
 
             .header-section {
-                height: 8vh;
-                padding: 8px 30px;
+                height: 6vh;
+                padding: 5px 25px;
+            }
+
+            .logo {
+                height: 65%;
+            }
+
+            .cart-container {
+                padding: 12px 60px;
+            }
+
+            .header-title img {
+                height: 28px;
             }
 
             .cart-section {
-                padding: 12px 30px;
+                padding: 8px 25px;
+            }
+
+            .cart-items-container {
+                gap: 8px;
+            }
+
+            .cart-item {
+                padding: 10px 12px;
+                min-height: 90px;
+                border-radius: 15px;
+            }
+
+            .item-image-container {
+                width: 75px;
+                height: 75px;
+                min-width: 75px;
+                margin-right: 12px;
+                border-radius: 12px;
+            }
+
+            .item-name {
+                font-size: 15px;
+                margin-bottom: 4px;
+            }
+
+            .quantity-controls {
+                padding: 6px 10px;
+                gap: 8px;
+            }
+
+            .quantity-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 14px;
+            }
+
+            .quantity-display {
+                font-size: 14px;
+                min-width: 30px;
+            }
+
+            .item-total-price {
+                font-size: 15px;
+            }
+
+            .item-actions {
+                gap: 8px;
+                padding-left: 10px;
+            }
+
+            .item-customize,
+            .item-remove {
+                padding: 6px 12px;
+                font-size: 11px;
+                border-radius: 8px;
+            }
+
+            .total-section {
+                padding: 6px 25px;
+            }
+
+            .total-container {
+                padding: 10px 20px;
+                border-radius: 12px;
+            }
+
+            .total-label {
+                font-size: 17px;
+            }
+
+            .total-amount {
+                font-size: 20px;
+            }
+
+            .footer-section {
+                padding: 6px 25px 8px 25px;
+            }
+
+            .button-container {
+                gap: 12px;
+            }
+
+            .back-button {
+                padding: 12px 25px;
+                font-size: 16px;
+                flex: 0 0 120px;
+                border-radius: 12px;
+            }
+
+            .pay-button {
+                padding: 12px 25px;
+                font-size: 16px;
+                border-radius: 12px;
+            }
+
+            .empty-cart {
+                padding: 40px 20px;
+            }
+
+            .empty-cart-icon {
+                font-size: 60px;
+                margin-bottom: 15px;
+            }
+
+            .empty-cart-text {
+                font-size: 20px;
+            }
+        }
+
+        /* Samsung A8 Tablet Landscape Mode - 1920x1200 */
+        @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) and (orientation: landscape) {
+            body {
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            .header-section {
+                height: 7vh;
+                padding: 6px 35px;
+            }
+
+            .logo {
+                height: 65%;
+            }
+
+            .cart-container {
+                padding: 14px 70px;
+            }
+
+            .header-title img {
+                height: 30px;
+            }
+
+            .cart-section {
+                padding: 10px 35px;
             }
 
             .cart-items-container {
@@ -466,20 +613,27 @@
             }
 
             .cart-item {
-                padding: 12px 15px;
-                min-height: 110px;
+                padding: 12px 16px;
+                min-height: 100px;
+                border-radius: 16px;
             }
 
             .item-image-container {
-                width: 90px;
-                height: 90px;
-                min-width: 90px;
+                width: 85px;
+                height: 85px;
+                min-width: 85px;
                 margin-right: 15px;
+                border-radius: 13px;
             }
 
             .item-name {
-                font-size: 18px;
-                margin-bottom: 6px;
+                font-size: 17px;
+                margin-bottom: 5px;
+            }
+
+            .quantity-controls {
+                padding: 7px 11px;
+                gap: 10px;
             }
 
             .quantity-btn {
@@ -494,21 +648,28 @@
             }
 
             .item-total-price {
-                font-size: 18px;
+                font-size: 17px;
+            }
+
+            .item-actions {
+                gap: 9px;
+                padding-left: 12px;
             }
 
             .item-customize,
             .item-remove {
-                padding: 8px 16px;
-                font-size: 13px;
+                padding: 8px 15px;
+                font-size: 12px;
+                border-radius: 9px;
             }
 
             .total-section {
-                padding: 8px 30px;
+                padding: 7px 35px;
             }
 
             .total-container {
-                padding: 12px 25px;
+                padding: 12px 28px;
+                border-radius: 13px;
             }
 
             .total-label {
@@ -520,115 +681,36 @@
             }
 
             .footer-section {
-                padding: 8px 30px 12px 30px;
+                padding: 8px 35px 10px 35px;
             }
 
             .button-container {
-                gap: 15px;
+                gap: 16px;
             }
 
             .back-button {
-                padding: 14px 30px;
+                padding: 14px 32px;
                 font-size: 18px;
-                flex: 0 0 140px;
+                flex: 0 0 150px;
+                border-radius: 13px;
             }
 
             .pay-button {
-                padding: 14px 30px;
+                padding: 14px 32px;
                 font-size: 18px;
-            }
-        }
-
-        /* Samsung A8 Tablet Landscape Mode - 1920x1200 */
-        @media (min-width: 1200px) and (max-width: 1920px) and (min-height: 800px) and (orientation: landscape) {
-            body {
-                height: 100vh;
-                overflow: hidden;
+                border-radius: 13px;
             }
 
-            .header-section {
-                height: 8vh;
-                padding: 8px 40px;
+            .empty-cart {
+                padding: 50px 20px;
             }
 
-            .cart-section {
-                padding: 12px 40px;
+            .empty-cart-icon {
+                font-size: 70px;
+                margin-bottom: 18px;
             }
 
-            .cart-items-container {
-                gap: 12px;
-            }
-
-            .cart-item {
-                padding: 15px 20px;
-                min-height: 130px;
-            }
-
-            .item-image-container {
-                width: 110px;
-                height: 110px;
-                min-width: 110px;
-                margin-right: 20px;
-            }
-
-            .item-name {
-                font-size: 22px;
-                margin-bottom: 8px;
-            }
-
-            .quantity-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 18px;
-            }
-
-            .quantity-display {
-                font-size: 18px;
-                min-width: 40px;
-            }
-
-            .item-total-price {
-                font-size: 22px;
-            }
-
-            .item-customize,
-            .item-remove {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-
-            .total-section {
-                padding: 8px 40px;
-            }
-
-            .total-container {
-                padding: 15px 35px;
-            }
-
-            .total-label {
-                font-size: 26px;
-            }
-
-            .total-amount {
-                font-size: 30px;
-            }
-
-            .footer-section {
-                padding: 10px 40px 15px 40px;
-            }
-
-            .button-container {
-                gap: 20px;
-            }
-
-            .back-button {
-                padding: 18px 40px;
-                font-size: 22px;
-                flex: 0 0 190px;
-            }
-
-            .pay-button {
-                padding: 18px 40px;
+            .empty-cart-text {
                 font-size: 22px;
             }
         }
