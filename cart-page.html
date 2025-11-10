@@ -379,7 +379,7 @@
         .footer-section {
             background-color: #efebce;
             width: 100%;
-            padding: 4px 40px 15px 40px;
+            padding: 4px 40px calc(15px + env(safe-area-inset-bottom)) 40px;
             flex-shrink: 0;
             margin-top: -20px;
         }
@@ -678,7 +678,7 @@
             .total-section {
                 padding: 0px 30px 2px 30px;
                 flex-shrink: 0;
-                margin-top: -16px;
+                margin-top: -10px;
             }
 
             .total-container {
@@ -695,9 +695,9 @@
             }
 
             .footer-section {
-                padding: 0px 30px 8px 30px;
+                padding: 2px 30px calc(18px + env(safe-area-inset-bottom)) 30px;
                 flex-shrink: 0;
-                margin-top: -18px;
+                margin-top: -12px;
             }
 
             .button-container {
