@@ -421,7 +421,7 @@
             position: fixed;
             bottom: 0;
             left: 18vw;
-            right: 10;
+            right: 0;
             height: 10vh;
             min-height: 80px;
             background:#efebce;
@@ -429,7 +429,7 @@
             align-items: center;
             justify-content: center;
             gap: 30px;
-            z-index: 65;
+            z-index: 50;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
         }
 
@@ -936,11 +936,20 @@
             }
 
             .bottom-nav {
-                left: calc(5vw + 5px);
-                right: -1px;
+                left: calc(18vw + 24px);
+                right: 24px;
                 height: 10vh;
                 min-height: 80px;
                 gap: 30px;
+                justify-content: flex-end;
+            }
+
+            .bottom-nav .nav-btn {
+                margin-left: 20px;
+            }
+
+            .bottom-nav .nav-btn:first-child {
+                margin-left: 0;
             }
 
             .nav-btn {
@@ -1766,8 +1775,4 @@
     </script>
 </body>
 </html>
-
-
-
-
 
