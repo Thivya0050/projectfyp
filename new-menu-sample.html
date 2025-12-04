@@ -15,6 +15,11 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="AMAK Kiosk">
     
+    <!-- Android Chrome PWA -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="msapplication-TileColor" content="#bf8a47">
+    <meta name="msapplication-navbutton-color" content="#bf8a47">
+    
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     
@@ -31,16 +36,25 @@
             box-sizing: border-box;
         }
 
+        html {
+            height: 100dvh;
+            width: 100dvw;
+            overflow: hidden;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             background: #F5F5DC;
-            height: 100vh;
+            height: 100dvh; /* Dynamic viewport height for mobile/tablet */
+            width: 100dvw; /* Dynamic viewport width for mobile/tablet */
             display: flex;
-            position: relative;
+            position: fixed; /* Fixed positioning to prevent scrolling issues */
             overflow-x: hidden;
             overflow-y: hidden;
             margin: 0;
             padding: 0;
+            top: 0;
+            left: 0;
         }
 
         /* Background Doodles */
@@ -1783,6 +1797,32 @@
             // Initialize with rice menu - MOVED INSIDE DOMContentLoaded
             const firstButton = document.querySelector('.category-btn.active');
             showCategory('rice', firstButton);
+            
+            // Request fullscreen for tablet/kiosk mode
+            // Note: Most browsers require user interaction, but we'll try on load
+            // For best results, install as PWA and open from home screen
+            if (document.documentElement.requestFullscreen) {
+                // Try to enter fullscreen (may require user gesture)
+                setTimeout(() => {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        console.log('Fullscreen not available:', err);
+                    });
+                }, 500);
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                // Safari/WebKit
+                setTimeout(() => {
+                    document.documentElement.webkitRequestFullscreen().catch(err => {
+                        console.log('Fullscreen not available:', err);
+                    });
+                }, 500);
+            } else if (document.documentElement.msRequestFullscreen) {
+                // IE/Edge
+                setTimeout(() => {
+                    document.documentElement.msRequestFullscreen().catch(err => {
+                        console.log('Fullscreen not available:', err);
+                    });
+                }, 500);
+            }
         });
 
         // Handle page show event (back navigation)
@@ -1797,6 +1837,5 @@
     </script>
 </body>
 </html>
-
 
 
