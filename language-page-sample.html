@@ -205,13 +205,12 @@
         .dining-card {
             background-color: #efebce;
             border-radius: 30px;
-            padding: 12px;
+            padding: 20px 12px;
             width: 90%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-bottom: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
@@ -220,6 +219,7 @@
             max-width: 90%;
             height: auto;
             object-fit: contain;
+            margin-bottom: 15px;
         }
 
         .dining-button {
@@ -235,13 +235,13 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            width: 100%;
+            width: 89%;
         }
 
         .dining-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            background-color: #4a3020;
+            background-color: #362315;
         }
 
         .dining-button:active {
@@ -355,7 +355,6 @@
 
             .dining-card {
                 padding: 20px;
-                margin-bottom: 18px;
             }
 
             .dining-button {
@@ -451,16 +450,16 @@
                 <div class="dining-option">
                     <div class="dining-card" onclick="selectDining('dineIn')">
                         <img src="dineInn.png" alt="Dine In" class="dining-image">
+                        <button class="dining-button" onclick="selectDining('dineIn')" data-translate="dineIn">DINE IN</button>
                     </div>
-                    <button class="dining-button" onclick="selectDining('dineIn')" data-translate="dineIn">DINE IN</button>
                 </div>
 
                 <!-- Take Away Option -->
                 <div class="dining-option">
                     <div class="dining-card" onclick="selectDining('takeAway')">
                         <img src="takeAwayy.png" alt="Take Away" class="dining-image">
+                        <button class="dining-button" onclick="selectDining('takeAway')" data-translate="takeAway">TAKE AWAY</button>
                     </div>
-                    <button class="dining-button" onclick="selectDining('takeAway')" data-translate="takeAway">TAKE AWAY</button>
                 </div>
             </div>
         </div>
