@@ -854,15 +854,205 @@
         let isEditingCartItem = false; // Track if we're editing an existing cart item
         let editingCartIndex = -1; // Index of item being edited
 
-        // Default customization options (can be customized per item)
-        const defaultCustomizations = [
-            { id: 'extra_spicy', name: 'Extra Spicy', name_ms: 'Lebih Pedas', name_ta: 'மிகவும் காரமான', name_zh: '额外辣', price: 0 },
-            { id: 'less_spicy', name: 'Less Spicy', name_ms: 'Kurang Pedas', name_ta: 'குறைவான காரம்', name_zh: '少辣', price: 0 },
-            { id: 'no_spicy', name: 'No Spicy', name_ms: 'Tidak Pedas', name_ta: 'காரம் வேண்டாம்', name_zh: '不辣', price: 0 },
-            { id: 'extra_egg', name: 'Extra Egg', name_ms: 'Tambah Telur', name_ta: 'கூடுதல் முட்டை', name_zh: '加鸡蛋', price: 1.50 },
-            { id: 'extra_chicken', name: 'Extra Chicken', name_ms: 'Tambah Ayam', name_ta: 'கூடுதல் கோழி', name_zh: '加鸡肉', price: 3.00 },
-            { id: 'no_onions', name: 'No Onions', name_ms: 'Tanpa Bawang', name_ta: 'வெங்காயம் வேண்டாம்', name_zh: '不要洋葱', price: 0 }
+        // Item-specific customization options
+        const itemCustomizations = {
+            // TOAST BREAD / TOAST BREAD SET
+            'toast bread': [
+                { id: 'butter', name: 'Butter', name_ms: 'Mentega', name_ta: 'வெண்ணெய்', name_zh: '黄油', price: 2.00 },
+                { id: 'kaya', name: 'Kaya', name_ms: 'Kaya', name_ta: 'கயா', name_zh: '咖椰', price: 2.00 }
+            ],
+            // ROTI JALA
+            'roti jala': [
+                { id: 'curry', name: 'Curry', name_ms: 'Kari', name_ta: 'கறி', name_zh: '咖喱', price: 2.00 }
+            ],
+            // AH HOCK KEN NOODLES
+            'ah hock ken noodles': [
+                { id: 'prawn', name: 'Prawn', name_ms: 'Udang', name_ta: 'இறால்', name_zh: '虾', price: 3.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 3.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // ASSAM LAKSA
+            'assam laksa': [
+                { id: 'minced_chicken', name: 'Minced Chicken', name_ms: 'Ayam Cincang', name_ta: 'கோழி துண்டு', name_zh: '鸡肉碎', price: 3.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 3.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // BIHUN GORENG
+            'bihun goreng': [
+                { id: 'minced_chicken', name: 'Minced Chicken', name_ms: 'Ayam Cincang', name_ta: 'கோழி துண்டு', name_zh: '鸡肉碎', price: 3.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // MEE SOTO
+            'mee soto': [
+                { id: 'minced_chicken', name: 'Minced Chicken', name_ms: 'Ayam Cincang', name_ta: 'கோழி துண்டு', name_zh: '鸡肉碎', price: 3.00 },
+                { id: 'fried_potato', name: 'Fried Potato', name_ms: 'Kentang Goreng', name_ta: 'பொரித்த உருளைக்கிழங்கு', name_zh: '炸土豆', price: 3.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // CANTONESE NOODLES
+            'cantonese noodles': [
+                { id: 'chicken', name: 'Chicken', name_ms: 'Ayam', name_ta: 'கோழி', name_zh: '鸡肉', price: 3.00 },
+                { id: 'fried_onion', name: 'Fried Onion', name_ms: 'Bawang Goreng', name_ta: 'வறுத்த வெங்காயம்', name_zh: '炸洋葱', price: 2.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // KUEY TEOW
+            'kuey teow': [
+                { id: 'fried_onion', name: 'Fried Onion', name_ms: 'Bawang Goreng', name_ta: 'வறுத்த வெங்காயம்', name_zh: '炸洋葱', price: 2.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // MEE GORENG
+            'mee goreng': [
+                { id: 'fried_onion', name: 'Fried Onion', name_ms: 'Bawang Goreng', name_ta: 'வறுத்த வெங்காயம்', name_zh: '炸洋葱', price: 2.00 },
+                { id: 'fried_egg', name: 'Fried Egg', name_ms: 'Telur Goreng', name_ta: 'வறுத்த முட்டை', name_zh: '煎蛋', price: 2.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // MEE REBUS
+            'mee rebus': [
+                { id: 'boiled_egg', name: 'Boiled Egg', name_ms: 'Telur Rebus', name_ta: 'வேகவைத்த முட்டை', name_zh: '水煮蛋', price: 2.00 },
+                { id: 'fried_onion', name: 'Fried Onion', name_ms: 'Bawang Goreng', name_ta: 'வறுத்த வெங்காயம்', name_zh: '炸洋葱', price: 2.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // PRAWN NOODLES
+            'prawn noodles': [
+                { id: 'prawn', name: 'Prawn', name_ms: 'Udang', name_ta: 'இறால்', name_zh: '虾', price: 3.00 },
+                { id: 'sliced_chicken', name: 'Sliced Chicken', name_ms: 'Ayam Potong', name_ta: 'கோழி துண்டு', name_zh: '鸡肉片', price: 3.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // NASI LEMAK BIASA
+            'nasi lemak biasa': [
+                { id: 'sambal', name: 'Sambal', name_ms: 'Sambal', name_ta: 'சம்பல்', name_zh: '参巴', price: 1.00 },
+                { id: 'fried_egg', name: 'Fried Egg', name_ms: 'Telur Goreng', name_ta: 'வறுத்த முட்டை', name_zh: '煎蛋', price: 2.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // NASI LEMAK AYAM SAMBAL
+            'nasi lemak ayam sambal': [
+                { id: 'sambal', name: 'Sambal', name_ms: 'Sambal', name_ta: 'சம்பல்', name_zh: '参巴', price: 1.00 },
+                { id: 'fried_egg', name: 'Fried Egg', name_ms: 'Telur Goreng', name_ta: 'வறுத்த முட்டை', name_zh: '煎蛋', price: 2.00 },
+                { id: 'ayam_sambal', name: 'Ayam Sambal', name_ms: 'Ayam Sambal', name_ta: 'சம்பல் கோழி', name_zh: '参巴鸡', price: 4.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // NASI LEMAK AYAM GORENG
+            'nasi lemak ayam goreng': [
+                { id: 'sambal', name: 'Sambal', name_ms: 'Sambal', name_ta: 'சம்பல்', name_zh: '参巴', price: 1.00 },
+                { id: 'fried_chicken', name: 'Fried Chicken', name_ms: 'Ayam Goreng', name_ta: 'பொரித்த கோழி', name_zh: '炸鸡', price: 4.00 },
+                { id: 'fried_egg', name: 'Fried Egg', name_ms: 'Telur Goreng', name_ta: 'வறுத்த முட்டை', name_zh: '煎蛋', price: 2.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // NASI KUNYIT
+            'nasi kunyit': [
+                { id: 'chicken_sambal', name: 'Chicken Sambal', name_ms: 'Ayam Sambal', name_ta: 'சம்பல் கோழி', name_zh: '参巴鸡', price: 4.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // NASI GORENG ALI
+            'nasi goreng ali': [
+                { id: 'fried_egg', name: 'Fried Egg', name_ms: 'Telur Goreng', name_ta: 'வறுத்த முட்டை', name_zh: '煎蛋', price: 2.00 },
+                { id: 'fried_onion', name: 'Fried Onion', name_ms: 'Bawang Goreng', name_ta: 'வறுத்த வெங்காயம்', name_zh: '炸洋葱', price: 1.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // HAINANESE CHICKEN RICE
+            'hainanese chicken rice': [
+                { id: 'hainanese_rice', name: 'Hainanese Rice', name_ms: 'Nasi Hainan', name_ta: 'ஹைனானீஸ் சாதம்', name_zh: '海南饭', price: 3.00 },
+                { id: 'hainanese_chicken', name: 'Hainanese Chicken', name_ms: 'Ayam Hainan', name_ta: 'ஹைனானீஸ் கோழி', name_zh: '海南鸡', price: 5.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // HAINANESE CHICKEN CHOP
+            'hainanese chicken chop': [
+                { id: 'french_fries', name: 'French Fries', name_ms: 'Kentang Goreng', name_ta: 'பிரெஞ்சு பொரியல்', name_zh: '薯条', price: 4.00 },
+                { id: 'chicken_chop', name: 'Chicken Chop', name_ms: 'Ayam Chop', name_ta: 'சிக்கன் சாப்', name_zh: '鸡扒', price: 7.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // CHICKEN PORRIDGE
+            'chicken porridge': [
+                { id: 'minced_chicken', name: 'Minced Chicken', name_ms: 'Ayam Cincang', name_ta: 'கோழி துண்டு', name_zh: '鸡肉碎', price: 3.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 3.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ]
+        };
+
+        // Drinks customization (ICE - free for all drinks)
+        const drinkCustomization = [
+            { id: 'ice', name: 'Ice', name_ms: 'Ais', name_ta: 'ஐஸ்', name_zh: '冰', price: 0 }
         ];
+
+        // Items with NO customization options
+        const noCustomizationItems = [
+            'fried chicken', 'sambal chicken', 'rendang chicken', 'chee chong fun',
+            'sambal kerang', 'sambal sotong', 'fried egg'
+        ];
+
+        // Drink keywords to identify drinks (must be whole word match)
+        const drinkKeywords = ['teh', 'kopi', 'milo', 'coffee', 'tea', 'barley', 'cham', 'limau', 'sirap', 'bandung', 'juice', 'air'];
+        
+        // Drinks that end with "ice" (full word, not part of "rice")
+        const drinkEndingsWithIce = [' ice', 'kopi ice', 'teh ice', 'milo ice', 'barley ice', 'cham ice', 'coffee ice'];
+
+        // Get customizations for current item
+        function getItemCustomizations(itemName) {
+            if (!itemName) return [];
+            
+            const lowerName = itemName.toLowerCase().trim();
+            
+            console.log('Getting customizations for:', lowerName);
+            
+            // Check if item has no customization
+            for (const noCustomItem of noCustomizationItems) {
+                if (lowerName.includes(noCustomItem) || noCustomItem.includes(lowerName)) {
+                    console.log('No customization match:', noCustomItem);
+                    return [];
+                }
+            }
+            
+            // Check for exact or partial match in itemCustomizations (longest match first)
+            let bestMatch = null;
+            let bestMatchLength = 0;
+            
+            for (const [key, customizations] of Object.entries(itemCustomizations)) {
+                if (lowerName.includes(key) || key.includes(lowerName)) {
+                    if (key.length > bestMatchLength) {
+                        bestMatch = customizations;
+                        bestMatchLength = key.length;
+                        console.log('Found match:', key);
+                    }
+                }
+            }
+            
+            if (bestMatch) {
+                console.log('Returning customizations for match');
+                return bestMatch;
+            }
+            
+            // Check if it's a drink (whole word match, not partial like "rice" containing "ice")
+            const isDrink = drinkKeywords.some(keyword => {
+                // Check for whole word match using word boundaries
+                const regex = new RegExp('\\b' + keyword + '\\b', 'i');
+                return regex.test(lowerName);
+            }) || drinkEndingsWithIce.some(ending => lowerName.endsWith(ending.trim()) || lowerName.includes(ending));
+            
+            if (isDrink) {
+                console.log('Detected as drink');
+                return drinkCustomization;
+            }
+            
+            console.log('No customizations found, returning empty');
+            // Return empty array for items not in the list
+            return [];
+        }
+
+        // Current active customizations for the item
+        let activeCustomizations = [];
 
         // Load item data
         function loadItemData() {
@@ -929,14 +1119,38 @@
             const container = document.getElementById('customizationOptions');
             const currentLang = localStorage.getItem('kioskLanguage') || 'en';
             
+            // Get base item name for matching
+            let itemName = currentItem ? currentItem.name : '';
+            if (isEditingCartItem) {
+                itemName = itemName.replace(/\s*\([^)]*\)\s*$/, '').trim();
+            }
+            
+            // Get item-specific customizations
+            activeCustomizations = getItemCustomizations(itemName);
+            
+            // If no customizations available, show message
+            if (activeCustomizations.length === 0) {
+                container.innerHTML = `
+                    <div class="customization-option" style="justify-content: center; padding: 20px;">
+                        <div class="option-label" style="text-align: center; color: #666;">
+                            ${currentLang === 'ms' ? 'Tiada pilihan penyesuaian untuk item ini' : 
+                              currentLang === 'ta' ? 'இந்த உருப்படிக்கு தனிப்பயனாக்க விருப்பங்கள் இல்லை' :
+                              currentLang === 'zh' ? '此商品没有自定义选项' :
+                              'No customization options available for this item'}
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
             // Initialize quantities to 0
-            defaultCustomizations.forEach(option => {
+            activeCustomizations.forEach(option => {
                 if (customizationQuantities[option.id] === undefined) {
                     customizationQuantities[option.id] = 0;
                 }
             });
             
-            container.innerHTML = defaultCustomizations.map(option => {
+            container.innerHTML = activeCustomizations.map(option => {
                 let optionName = option.name;
                 
                 // Get translated name
@@ -969,7 +1183,7 @@
             
             // Collect all selected add-ons
             let selectedAddons = [];
-            defaultCustomizations.forEach(option => {
+            activeCustomizations.forEach(option => {
                 const qty = customizationQuantities[option.id] || 0;
                 if (qty > 0) {
                     let optionName = option.name;
@@ -1017,7 +1231,7 @@
             let customizationTotal = 0;
             
             // Calculate total from all options with quantities
-            defaultCustomizations.forEach(option => {
+            activeCustomizations.forEach(option => {
                 const qty = customizationQuantities[option.id] || 0;
                 customizationTotal += option.price * qty;
             });
@@ -1038,7 +1252,7 @@
             let customizationTotal = 0;
             let customizationsList = [];
             
-            defaultCustomizations.forEach(option => {
+            activeCustomizations.forEach(option => {
                 const qty = customizationQuantities[option.id] || 0;
                 if (qty > 0) {
                     customizationTotal += option.price * qty;
