@@ -117,7 +117,7 @@
             grid-template-rows: repeat(2, 1fr);
             gap: 20px;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 50px auto 0 auto;
             width: 100%;
             height: 280px;
             justify-content: center;
@@ -168,11 +168,14 @@
             border-radius: 15px;
             padding: 0;
             max-width: 600px;
+            max-height: 200px;
             margin: 0 auto;
             width: 100%;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             overflow: hidden;
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         .summary-header {
@@ -182,10 +185,16 @@
             font-size: 18px;
             font-weight: bold;
             text-transform: uppercase;
+            flex-shrink: 0;
         }
 
         .summary-content {
             padding: 15px;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            flex: 1;
+            overflow: hidden;
         }
 
         .summary-items {
@@ -193,6 +202,10 @@
             flex-direction: column;
             gap: 8px;
             margin-bottom: 12px;
+            max-height: 90px;
+            overflow-y: auto;
+            flex-shrink: 1;
+            min-height: 0;
         }
 
         .summary-item {
@@ -217,13 +230,15 @@
             height: 2px;
             background: #FDB913;
             margin: 12px 0;
+            flex-shrink: 0;
         }
 
         .summary-total {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
+            padding: 5px 0;
+            flex-shrink: 0;
         }
 
         .total-label {
@@ -355,25 +370,39 @@
                 max-width: 480px;
                 height: 180px;
                 gap: 10px;
+                margin-top: 40px;
             }
 
             .order-summary {
                 max-width: 480px;
+                max-height: 250px;
                 border-radius: 13px;
+                display: flex;
+                flex-direction: column;
             }
 
             .summary-header {
                 padding: 7px 14px;
                 font-size: 13px;
+                flex-shrink: 0;
             }
 
             .summary-content {
                 padding: 8px;
+                display: flex;
+                flex-direction: column;
+                min-height: 0;
+                flex: 1;
+                overflow: hidden;
             }
 
             .summary-items {
                 gap: 4px;
                 margin-bottom: 7px;
+                max-height: 120px;
+                overflow-y: auto;
+                flex-shrink: 1;
+                min-height: 0;
             }
 
             .summary-item {
@@ -386,15 +415,15 @@
             }
 
             .summary-total {
-                padding: 4px 0;
+                padding: 2px 0;
             }
 
             .total-label {
-                font-size: 14px;
+                font-size: 10px;
             }
 
             .total-amount {
-                font-size: 16px;
+                font-size: 10px;
             }
 
             .payment-method {
@@ -477,25 +506,39 @@
                 max-width: 520px;
                 height: 180px;
                 gap: 10px;
+                margin-top: 40px;
             }
 
             .order-summary {
                 max-width: 520px;
+                max-height: 250px;
                 border-radius: 12px;
+                display: flex;
+                flex-direction: column;
             }
 
             .summary-header {
                 padding: 6px 12px;
                 font-size: 13px;
+                flex-shrink: 0;
             }
 
             .summary-content {
                 padding: 8px;
+                display: flex;
+                flex-direction: column;
+                min-height: 0;
+                flex: 1;
+                overflow: hidden;
             }
 
             .summary-items {
                 gap: 3px;
                 margin-bottom: 6px;
+                max-height: 120px;
+                overflow-y: auto;
+                flex-shrink: 1;
+                min-height: 0;
             }
 
             .summary-item {
@@ -598,6 +641,7 @@
                 gap: 15px;
                 max-width: 400px;
                 height: auto;
+                margin-top: 40px;
             }
 
             .payment-method {
@@ -607,6 +651,7 @@
 
             .order-summary {
                 max-width: 400px;
+                max-height: 280px;
             }
 
             .button-container {
