@@ -999,17 +999,54 @@
         // Drinks that end with "ice" (full word, not part of "rice")
         const drinkEndingsWithIce = [' ice', 'kopi ice', 'teh ice', 'milo ice', 'barley ice', 'cham ice', 'coffee ice'];
 
+        // Normalize item name to handle abbreviations and variations
+        function normalizeItemName(itemName) {
+            if (!itemName) return '';
+            
+            let normalized = itemName.toLowerCase().trim();
+            
+            // Handle common abbreviations and variations (order matters - check longer patterns first)
+            const nameMappings = [
+                ['nasi lemak ag', 'nasi lemak ayam goreng'],
+                ['nasi lemak as', 'nasi lemak ayam sambal'],
+                ['nl ag', 'nasi lemak ayam goreng'],
+                ['nl as', 'nasi lemak ayam sambal'],
+                ['nl biasa', 'nasi lemak biasa'],
+                [' ag', ' ayam goreng'],
+                [' as', ' ayam sambal'],
+                ['ah hock ken noodle', 'ah hock ken noodles'],
+                ['ah hock ken', 'ah hock ken noodles'],
+                ['hainanese rice', 'hainanese chicken rice'],
+                ['hainanese chicken', 'hainanese chicken rice'],
+                ['chicken chop', 'hainanese chicken chop'],
+                ['hainanese chop', 'hainanese chicken chop']
+            ];
+            
+            // Apply mappings (check longer patterns first, apply most specific match)
+            for (const [abbrev, fullName] of nameMappings) {
+                if (normalized.includes(abbrev)) {
+                    normalized = normalized.replace(abbrev, fullName);
+                    // Continue to check if there are more abbreviations to expand
+                }
+            }
+            
+            return normalized;
+        }
+
         // Get customizations for current item
         function getItemCustomizations(itemName) {
             if (!itemName) return [];
             
             const lowerName = itemName.toLowerCase().trim();
+            const normalizedName = normalizeItemName(itemName);
             
             console.log('Getting customizations for:', lowerName);
+            console.log('Normalized name:', normalizedName);
             
             // Check if item has no customization
             for (const noCustomItem of noCustomizationItems) {
-                if (lowerName.includes(noCustomItem) || noCustomItem.includes(lowerName)) {
+                if (lowerName.includes(noCustomItem) || noCustomItem.includes(lowerName) ||
+                    normalizedName.includes(noCustomItem) || noCustomItem.includes(normalizedName)) {
                     console.log('No customization match:', noCustomItem);
                     return [];
                 }
@@ -1019,12 +1056,18 @@
             let bestMatch = null;
             let bestMatchLength = 0;
             
-            for (const [key, customizations] of Object.entries(itemCustomizations)) {
-                if (lowerName.includes(key) || key.includes(lowerName)) {
-                    if (key.length > bestMatchLength) {
-                        bestMatch = customizations;
-                        bestMatchLength = key.length;
-                        console.log('Found match:', key);
+            // Try matching with both original and normalized name
+            const namesToTry = [lowerName, normalizedName];
+            
+            for (const nameToMatch of namesToTry) {
+                for (const [key, customizations] of Object.entries(itemCustomizations)) {
+                    // Check if key is contained in name or name is contained in key
+                    if (nameToMatch.includes(key) || key.includes(nameToMatch)) {
+                        if (key.length > bestMatchLength) {
+                            bestMatch = customizations;
+                            bestMatchLength = key.length;
+                            console.log('Found match:', key, 'for name:', nameToMatch);
+                        }
                     }
                 }
             }
@@ -1038,8 +1081,12 @@
             const isDrink = drinkKeywords.some(keyword => {
                 // Check for whole word match using word boundaries
                 const regex = new RegExp('\\b' + keyword + '\\b', 'i');
-                return regex.test(lowerName);
-            }) || drinkEndingsWithIce.some(ending => lowerName.endsWith(ending.trim()) || lowerName.includes(ending));
+                return regex.test(lowerName) || regex.test(normalizedName);
+            }) || drinkEndingsWithIce.some(ending => {
+                const endingTrimmed = ending.trim();
+                return lowerName.endsWith(endingTrimmed) || lowerName.includes(ending) ||
+                       normalizedName.endsWith(endingTrimmed) || normalizedName.includes(ending);
+            });
             
             if (isDrink) {
                 console.log('Detected as drink');
