@@ -947,6 +947,14 @@
                 { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
                 { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
             ],
+            // NASI LEMAK AG (alias for NASI LEMAK AYAM GORENG)
+            'nasi lemak ag': [
+                { id: 'sambal', name: 'Sambal', name_ms: 'Sambal', name_ta: 'சம்பல்', name_zh: '参巴', price: 1.00 },
+                { id: 'fried_chicken', name: 'Fried Chicken', name_ms: 'Ayam Goreng', name_ta: 'பொரித்த கோழி', name_zh: '炸鸡', price: 4.00 },
+                { id: 'fried_egg', name: 'Fried Egg', name_ms: 'Telur Goreng', name_ta: 'வறுத்த முட்டை', name_zh: '煎蛋', price: 2.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
             // NASI KUNYIT
             'nasi kunyit': [
                 { id: 'chicken_sambal', name: 'Chicken Sambal', name_ms: 'Ayam Sambal', name_ta: 'சம்பல் கோழி', name_zh: '参巴鸡', price: 4.00 },
@@ -955,6 +963,13 @@
             ],
             // NASI GORENG ALI
             'nasi goreng ali': [
+                { id: 'fried_egg', name: 'Fried Egg', name_ms: 'Telur Goreng', name_ta: 'வறுத்த முட்டை', name_zh: '煎蛋', price: 2.00 },
+                { id: 'fried_onion', name: 'Fried Onion', name_ms: 'Bawang Goreng', name_ta: 'வறுத்த வெங்காயம்', name_zh: '炸洋葱', price: 1.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
+            // NASI GORENG KAMPUNG
+            'nasi goreng kampung': [
                 { id: 'fried_egg', name: 'Fried Egg', name_ms: 'Telur Goreng', name_ta: 'வறுத்த முட்டை', name_zh: '煎蛋', price: 2.00 },
                 { id: 'fried_onion', name: 'Fried Onion', name_ms: 'Bawang Goreng', name_ta: 'வறுத்த வெங்காயம்', name_zh: '炸洋葱', price: 1.00 },
                 { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
@@ -1025,8 +1040,14 @@
             // Apply mappings (check longer patterns first, apply most specific match)
             for (const [abbrev, fullName] of nameMappings) {
                 if (normalized.includes(abbrev)) {
-                    normalized = normalized.replace(abbrev, fullName);
-                    // Continue to check if there are more abbreviations to expand
+                    // Use replace with word boundary for ' ag' and ' as' to avoid partial matches
+                    if (abbrev === ' ag' || abbrev === ' as') {
+                        // Replace ' ag' or ' as' only when followed by space or end of string
+                        normalized = normalized.replace(/\s+ag(\s|$)/gi, ' ayam goreng$1');
+                        normalized = normalized.replace(/\s+as(\s|$)/gi, ' ayam sambal$1');
+                    } else {
+                        normalized = normalized.replace(abbrev, fullName);
+                    }
                 }
             }
             
