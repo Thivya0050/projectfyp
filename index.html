@@ -136,8 +136,8 @@
         }
 
         .logo-video {
-            height: 100%;
-            max-height: 300px;
+            height: 80%;
+            max-height: 250px;
             width: auto;
             object-fit: contain;
         }
@@ -165,12 +165,12 @@
         }
 
         .image-card {
-            background: transparent;
+            background: #efebce;
             border-radius: 35px;
             padding: 0;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            width: 92%;
-            height: 98%;
+            width: 95%;
+            height: 100%;
             position: relative;
             overflow: hidden;
         }
@@ -188,6 +188,7 @@
             justify-content: center;
             border-radius: 35px;
             overflow: hidden;
+            background: #efebce;
         }
 
         .carousel-slide.active {
@@ -205,7 +206,7 @@
         .dish-video {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: fill;
             border-radius: 35px;
         }
 
@@ -317,13 +318,7 @@
             
             .image-card {
                 width: 90%;
-                height: 96%;
-            }
-            
-            .dish-video {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
+                height: 85%;
             }
             
             .halal-badge {
@@ -365,13 +360,7 @@
             
             .image-card {
                 width: 90%;
-                height: 96%;
-            }
-            
-            .dish-video {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
+                height: 85%;
             }
             
             .halal-badge {
@@ -396,7 +385,7 @@
         @media (min-width: 1900px) and (max-width: 1920px) and (min-height: 1100px) and (max-height: 1200px) {
             .image-card {
                 width: 88%;
-                height: 94%;
+                height: 82%;
             }
             
             .halal-badge {
@@ -501,26 +490,25 @@
             <div class="image-card">
                 <!-- Video Slide -->
                 <div class="carousel-slide active">
-                    <video class="dish-video" muted playsinline data-video-index="0">
+                    <video class="dish-video" autoplay muted playsinline id="mainVideo">
                         <source src="mgp1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                
-                <div class="carousel-slide">
-                    <video class="dish-video" muted playsinline data-video-index="1">
+                <div class="carousel-slide active">
+                    <video class="dish-video" autoplay muted playsinline id="mainVideo">
                         <source src="mgp2.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
-
-                <div class="carousel-slide">
-                    <video class="dish-video" muted playsinline data-video-index="2">
+                <div class="carousel-slide active">
+                    <video class="dish-video" autoplay muted playsinline id="mainVideo">
                         <source src="mgp3.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 
+               
                 
                 <!-- Halal Badge -->
                 <div class="halal-badge"></div>
@@ -543,47 +531,40 @@
     
     <script>
         let slideIndex = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const dots = document.querySelectorAll('.dot');
-
-        function getVideos() {
-            return Array.from(slides).map(s => s.querySelector('.dish-video'));
-        }
+        let slideInterval;
+        let isVideoPlaying = true;
 
         function showSlide(n) {
-            const videos = getVideos();
-            if (n >= slides.length) { slideIndex = 0; n = 0; }
-            if (n < 0) { slideIndex = slides.length - 1; n = slideIndex; }
-            slideIndex = n;
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            if (n >= slides.length) { slideIndex = 0; }
+            if (n < 0) { slideIndex = slides.length - 1; }
             
             slides.forEach(slide => slide.classList.remove('active'));
             dots.forEach(dot => dot.classList.remove('active'));
             
             slides[slideIndex].classList.add('active');
-            if (dots[slideIndex]) dots[slideIndex].classList.add('active');
-        }
-
-        function playCurrentVideo() {
-            const videos = getVideos();
-            videos.forEach((v, i) => {
-                if (i === slideIndex) {
-                    v.currentTime = 0;
-                    v.play().catch(() => {});
-                } else {
-                    v.pause();
-                    v.currentTime = 0;
-                }
-            });
+            dots[slideIndex].classList.add('active');
         }
 
         function nextSlide() {
-            slideIndex = (slideIndex + 1) % slides.length;
+            slideIndex++;
             showSlide(slideIndex);
-            playCurrentVideo();
+        }
+
+        function startAutoRotation() {
+            // Don't start auto-rotation if video is playing
+            if (isVideoPlaying) return;
+            
+            slideInterval = setInterval(() => {
+                nextSlide();
+            }, 5000); // 5 seconds for each image
         }
 
         function startOrder() {
             console.log('Order started');
+            // Add navigation here
             window.location.href = 'language-page-sample.html';
         }
 
@@ -692,29 +673,61 @@
                 console.log('Test - Element position:', testElement.getBoundingClientRect());
             }
             
+            const mainVideo = document.getElementById('mainVideo');
             const logoVideo = document.querySelector('.logo-video');
-            const videos = getVideos();
             
+            // Initialize logo video
             if (logoVideo) {
                 logoVideo.play().catch(e => {
                     console.log('Logo video autoplay prevented:', e);
                 });
             }
             
-            showSlide(0);
-            playCurrentVideo();
-            
-            videos.forEach((video, i) => {
-                video.addEventListener('ended', function() {
-                    nextSlide();
+            // Initialize carousel video
+            if (mainVideo) {
+                // Force video to play
+                mainVideo.play().catch(e => {
+                    console.log('Main video autoplay prevented:', e);
+                    // Try to play on user interaction
+                    document.addEventListener('click', function() {
+                        mainVideo.play();
+                    }, { once: true });
                 });
-            });
 
+                // When video ends, start auto-rotation for images
+                mainVideo.addEventListener('ended', function() {
+                    isVideoPlaying = false;
+                    slideIndex = 1; // Move to first image (assamL.jpg)
+                    showSlide(slideIndex);
+                    startAutoRotation(); // Start 5-second intervals for images
+                });
+
+                // When video starts playing again (loop back), stop auto-rotation
+                mainVideo.addEventListener('play', function() {
+                    isVideoPlaying = true;
+                    clearInterval(slideInterval);
+                });
+            }
+
+            // Dots interaction - manual control
             document.querySelectorAll('.dot').forEach((dot, index) => {
                 dot.addEventListener('click', () => {
                     slideIndex = index;
                     showSlide(slideIndex);
-                    playCurrentVideo();
+                    
+                    // Reset auto-rotation
+                    clearInterval(slideInterval);
+                    if (index !== 0) { // If not on video
+                        isVideoPlaying = false;
+                        startAutoRotation();
+                    } else {
+                        isVideoPlaying = true;
+                        if (mainVideo) {
+                            mainVideo.currentTime = 0;
+                            mainVideo.play();
+                        }
+                    }
+
                 });
             });
         });
