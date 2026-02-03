@@ -489,19 +489,19 @@
             <div class="image-card">
                 <!-- Video Slide -->
                 <div class="carousel-slide active">
-                    <video class="dish-video" autoplay muted playsinline id="mainVideo">
+                    <video class="dish-video" autoplay muted playsinline>
                         <source src="mgp1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                <div class="carousel-slide active">
-                    <video class="dish-video" autoplay muted playsinline id="mainVideo">
+                <div class="carousel-slide">
+                    <video class="dish-video" playsinline>
                         <source src="mgp2.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                <div class="carousel-slide active">
-                    <video class="dish-video" autoplay muted playsinline id="mainVideo">
+                <div class="carousel-slide">
+                    <video class="dish-video" playsinline>
                         <source src="mgp3.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -537,18 +537,32 @@
             const slides = document.querySelectorAll('.carousel-slide');
             const dots = document.querySelectorAll('.dot');
             
-            if (n >= slides.length) { slideIndex = 0; }
-            if (n < 0) { slideIndex = slides.length - 1; }
+            slideIndex = n;
+            if (slideIndex >= slides.length) { slideIndex = 0; }
+            if (slideIndex < 0) { slideIndex = slides.length - 1; }
             
             slides.forEach(slide => slide.classList.remove('active'));
             dots.forEach(dot => dot.classList.remove('active'));
             
             slides[slideIndex].classList.add('active');
             dots[slideIndex].classList.add('active');
+            
+            // Pause all carousel videos, then play the active slide's video
+            document.querySelectorAll('.image-card .dish-video').forEach(v => v.pause());
+            const activeVideo = document.querySelector('.carousel-slide.active .dish-video');
+            if (activeVideo) {
+                activeVideo.currentTime = 0;
+                activeVideo.play().catch(e => console.log('Video play prevented:', e));
+            }
         }
 
         function nextSlide() {
             slideIndex++;
+            showSlide(slideIndex);
+        }
+
+        function prevSlide() {
+            slideIndex--;
             showSlide(slideIndex);
         }
 
@@ -672,7 +686,6 @@
                 console.log('Test - Element position:', testElement.getBoundingClientRect());
             }
             
-            const mainVideo = document.getElementById('mainVideo');
             const logoVideo = document.querySelector('.logo-video');
             
             // Initialize logo video
@@ -682,51 +695,46 @@
                 });
             }
             
-            // Initialize carousel video
-            if (mainVideo) {
-                // Force video to play
-                mainVideo.play().catch(e => {
-                    console.log('Main video autoplay prevented:', e);
-                    // Try to play on user interaction
+            // Initialize carousel: ensure first slide is active and play its video
+            showSlide(0);
+            const activeVideo = document.querySelector('.carousel-slide.active .dish-video');
+            if (activeVideo) {
+                activeVideo.play().catch(e => {
+                    console.log('Carousel video autoplay prevented:', e);
                     document.addEventListener('click', function() {
-                        mainVideo.play();
+                        document.querySelector('.carousel-slide.active .dish-video').play();
                     }, { once: true });
                 });
+            }
 
-                // When video ends, start auto-rotation for images
-                mainVideo.addEventListener('ended', function() {
-                    isVideoPlaying = false;
-                    slideIndex = 1; // Move to first image (assamL.jpg)
-                    showSlide(slideIndex);
-                    startAutoRotation(); // Start 5-second intervals for images
+            // When each video ends, slide to next (carousel loops)
+            document.querySelectorAll('.image-card .dish-video').forEach((video) => {
+                video.addEventListener('ended', function() {
+                    nextSlide();
                 });
+            });
 
-                // When video starts playing again (loop back), stop auto-rotation
-                mainVideo.addEventListener('play', function() {
-                    isVideoPlaying = true;
-                    clearInterval(slideInterval);
-                });
+            // Swipe: left = next, right = previous
+            const imageCard = document.querySelector('.image-card');
+            if (imageCard) {
+                let touchStartX = 0;
+                const swipeMin = 50;
+                imageCard.addEventListener('touchstart', function(e) {
+                    touchStartX = e.touches[0].clientX;
+                }, { passive: true });
+                imageCard.addEventListener('touchend', function(e) {
+                    const touchEndX = e.changedTouches[0].clientX;
+                    const diff = touchStartX - touchEndX;
+                    if (diff > swipeMin) nextSlide();
+                    else if (diff < -swipeMin) prevSlide();
+                }, { passive: true });
             }
 
             // Dots interaction - manual control
             document.querySelectorAll('.dot').forEach((dot, index) => {
                 dot.addEventListener('click', () => {
-                    slideIndex = index;
-                    showSlide(slideIndex);
-                    
-                    // Reset auto-rotation
+                    showSlide(index);
                     clearInterval(slideInterval);
-                    if (index !== 0) { // If not on video
-                        isVideoPlaying = false;
-                        startAutoRotation();
-                    } else {
-                        isVideoPlaying = true;
-                        if (mainVideo) {
-                            mainVideo.currentTime = 0;
-                            mainVideo.play();
-                        }
-                    }
-
                 });
             });
         });
