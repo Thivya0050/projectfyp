@@ -150,7 +150,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgba(239, 235, 206, 0.82);
+            background-color: #efebce;
             z-index: 10;
         }
 
@@ -173,6 +173,7 @@
             height: 100%;
             position: relative;
             overflow: hidden;
+            isolation: isolate;
         }
 
         .carousel-slide {
@@ -587,8 +588,6 @@
         // Create static doodle pattern: gaps between all doodles, none on logo, video container, or start button
         function createDoodlePattern() {
             console.log('Creating static doodle pattern...');
-            const existingBelowLogo = document.getElementById('doodle-below-logo');
-            if (existingBelowLogo) existingBelowLogo.remove();
             const doodleBackground = document.getElementById('doodleBackground');
             
             if (!doodleBackground) {
@@ -609,11 +608,11 @@
                     height: window.innerHeight * 0.18
                 }, // logo only - doodles allowed around it (left/right/top)
                 {
-                    x: window.innerWidth * 0.08,
-                    y: window.innerHeight * 0.28,
-                    width: window.innerWidth * 0.84,
-                    height: window.innerHeight * 0.46
-                }, // video container - no doodles (starts below "below logo" strip)
+                    x: 0,
+                    y: window.innerHeight * 0.24,
+                    width: window.innerWidth,
+                    height: window.innerHeight * 0.54
+                }, // dish video - no doodles on or behind it (full width)
                 {
                     x: 0,
                     y: window.innerHeight * 0.78,
@@ -625,24 +624,6 @@
             const placedDoodles = [];
             const sizes = ['small', 'medium'];
             const maxSize = Math.max(...Object.values(SIZE_MAP));
-            
-            // Exactly 1 doodle below the logo (in the strip between logo and video container)
-            const belowLogoW = SIZE_MAP.medium;
-            const belowLogoH = belowLogoW;
-            const belowLogoX = (window.innerWidth - belowLogoW) / 2;
-            const belowLogoY = window.innerHeight * 0.235;
-            const belowLogo = document.createElement('div');
-            belowLogo.id = 'doodle-below-logo';
-            belowLogo.className = 'doodle-item medium';
-            belowLogo.style.backgroundImage = `url('${doodleImages[Math.floor(Math.random() * doodleImages.length)]}')`;
-            belowLogo.style.left = `${belowLogoX}px`;
-            belowLogo.style.top = `${belowLogoY}px`;
-            belowLogo.style.transform = `rotate(${(Math.random() * 2 - 1) * 20}deg)`;
-            belowLogo.style.position = 'fixed';
-            belowLogo.style.zIndex = '11';
-            belowLogo.style.pointerEvents = 'none';
-            document.body.appendChild(belowLogo);
-            placedDoodles.push({ x: belowLogoX, y: belowLogoY, w: belowLogoW, h: belowLogoH });
             
             for (let i = 0; i < 38; i++) {
                 const doodle = document.createElement('div');
@@ -691,13 +672,14 @@
         }
         
         function isInSafeZone(position, w, h, safeZones) {
-            const cx = position.x + w / 2;
-            const cy = position.y + h / 2;
             for (let zone of safeZones) {
-                if (cx >= zone.x && cx <= zone.x + zone.width &&
-                    cy >= zone.y && cy <= zone.y + zone.height) return true;
+                if (rectsOverlap(position.x, position.y, w, h, zone.x, zone.y, zone.width, zone.height)) return true;
             }
             return false;
+        }
+        
+        function rectsOverlap(x1, y1, w1, h1, x2, y2, w2, h2) {
+            return !(x1 + w1 <= x2 || x2 + w2 <= x1 || y1 + h1 <= y2 || y2 + h2 <= y1);
         }
         
         function overlapsAny(position, w, h, placedDoodles) {
