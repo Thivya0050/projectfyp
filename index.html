@@ -496,13 +496,13 @@
                     </video>
                 </div>
                 <div class="carousel-slide">
-                    <video class="dish-video" playsinline>
+                    <video class="dish-video" muted playsinline>
                         <source src="mgp2.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="carousel-slide">
-                    <video class="dish-video" playsinline>
+                    <video class="dish-video" muted playsinline>
                         <source src="mgp3.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -675,15 +675,21 @@
             
             // Initialize carousel: ensure first slide is active and play its video
             showSlide(0);
+            const dishVideos = document.querySelectorAll('.image-card .dish-video');
             const activeVideo = document.querySelector('.carousel-slide.active .dish-video');
             if (activeVideo) {
-                activeVideo.play().catch(e => {
-                    console.log('Carousel video autoplay prevented:', e);
-                    document.addEventListener('click', function() {
-                        document.querySelector('.carousel-slide.active .dish-video').play();
-                    }, { once: true });
-                });
+                activeVideo.play().catch(e => console.log('Carousel video autoplay prevented:', e));
             }
+            // On first user interaction, unmute all dish videos so sound works (browser allows unmute after gesture)
+            function unmuteDishVideos() {
+                dishVideos.forEach(function(v) { v.muted = false; });
+                const active = document.querySelector('.carousel-slide.active .dish-video');
+                if (active) active.play().catch(function() {});
+                document.removeEventListener('click', unmuteDishVideos);
+                document.removeEventListener('touchend', unmuteDishVideos);
+            }
+            document.addEventListener('click', unmuteDishVideos, { once: true });
+            document.addEventListener('touchend', unmuteDishVideos, { once: true });
 
             // When each video ends, slide to next (carousel loops)
             document.querySelectorAll('.image-card .dish-video').forEach((video) => {
