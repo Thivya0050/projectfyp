@@ -88,6 +88,31 @@ const translations = {
         sidesMenu: "SIDES MENU",
         drinksMenu: "DRINKS MENU",
         
+        // Rice Menu Items
+        "Nasi Lemak Ayam Sambal": "Nasi Lemak Chicken Sambal",
+        "Nasi Lemak AG": "Nasi Lemak Fried Chicken",
+        "Nasi Lemak Biasa": "Nasi Lemak",
+        "Nasi Goreng Cina": "Chinese Fried Rice",
+        "Nasi Goreng Kampung": "Fried Village Rice",
+        "Nasi Goreng Ali": "Ali Fried Rice",
+        
+        // Noodles Menu Items
+        "Bihun Goreng": "Fried Bihoon",
+        "Bihun Soto": "Soto Bihun",
+        "Mee Goreng": "Fried Mee",
+        "Mee Rebus": "Steamed Mee",
+        "Mee Soto": "Soto Mee",
+        
+        // Sides Menu Items
+        "Telur Mata": "Sunny Side Up",
+        "Sambal Kerang": "Cockles Sambal",
+        "Sambal Sotong": "Squid Sambal",
+        "Roti Bakar Set": "Toast Bread Set",
+        "Roti Bakar 2 Set": "Toast Bread 2 Set",
+        "Ayam Rendang": "Chicken Rendang",
+        "Ayam Sambal": "Chicken Sambal",
+        "Ayam Goreng": "Fried Chicken",
+        
         // Drinks Menu Items
         "Teh Tarik": "Teh Tarik",
         "Kopi O": "Kopi O",
@@ -96,7 +121,14 @@ const translations = {
         "Air Sirap": "Rose Syrup Drink",
         "Coconut Shake": "Coconut Shake",
         "Fresh Orange Juice": "Fresh Orange Juice",
-        "Mineral Water": "Mineral Water"
+        "Mineral Water": "Mineral Water",
+        "Barley Ice": "Iced Barley",
+        "Cham Ice": "Iced Cham",
+        "Coffee Ice": "Ice Coffee",
+        "Milo Ice": "Iced Milo",
+        "Nescafe Ice": "Iced Nescafe",
+        "Sirap Ice": "Iced Sirap",
+        "Teh Ice": "Iced Tea"
     },
     
     // Malay
@@ -185,15 +217,77 @@ const translations = {
         sidesMenu: "MENU LAUK PAUK",
         drinksMenu: "MENU MINUMAN",
         
+        // Rice Menu Items
+        "Nasi Lemak Ayam Sambal": "Nasi Lemak Ayam Sambal",
+        "Nasi Lemak AG": "Nasi Lemak Ayam Goreng",
+        "Nasi Lemak Biasa": "Nasi Lemak Biasa",
+        "Hainanese Chicken Rice": "Nasi Ayam Hainanese",
+        "Nasi Goreng Cina": "Nasi Goreng Cina",
+        "Nasi Goreng Kampung": "Nasi Goreng Kampung",
+        "Nasi Goreng Ali": "Nasi Goreng Ali",
+        "Chicken Porridge": "Bubur Ayam",
+        "Hainan Chicken Chop": "Chicken Chop Hainan",
+        "Nasi Lemak Chicken Sambal": "Nasi Lemak Ayam Sambal",
+        "Nasi Lemak Fried Chicken": "Nasi Lemak Ayam Goreng",
+        "Nasi Lemak": "Nasi Lemak Biasa",
+        "Fried Chinese Rice": "Nasi Goreng Cina",
+        "Fried Village Rice": "Nasi Goreng Kampung",
+        "Ali Fried Rice": "Nasi Goreng Ali",
+        
+        // Noodles Menu Items
+        "Bihun Goreng": "Bihun Goreng",
+        "Bihun Soto": "Bihun Soto",
+        "Mee Goreng": "Mi Goreng",
+        "Mee Rebus": "Mi Rebus",
+        "Mee Soto": "Mi Soto",
+        "Cantonese Noodles": "Mi Kantonis",
+        "Prawn Noodle": "Mi Udang",
+        "Fried Bihoon": "Bihun Goreng",
+        "Soto Bihun": "Bihun Soto",
+        "Fried Mee": "Mi Goreng",
+        "Steamed Mee": "Mi Rebus",
+        "Soto Mee": "Mi Soto",
+        
+        // Sides Menu Items
+        "Telur Mata": "Telur Mata",
+        "Sambal Kerang": "Sambal Kerang",
+        "Sambal Sotong": "Sambal Sotong",
+        "Roti Bakar Set": "Roti Bakar Set",
+        "Roti Bakar 2 Set": "Roti Bakar 2 Set",
+        "Ayam Rendang": "Ayam Rendang",
+        "Ayam Sambal": "Ayam Sambal",
+        "Ayam Goreng": "Ayam Goreng",
+        "Sunny Side Up": "Telur Mata",
+        "Cockles Sambal": "Sambal Kerang",
+        "Squid Sambal": "Sambal Sotong",
+        "Toast Bread Set": "Roti Bakar Set",
+        "Toast Bread 2 Set": "Roti Bakar 2 Set",
+        "Chicken Rendang": "Ayam Rendang",
+        "Chicken Sambal": "Ayam Sambal",
+        "Fried Chicken": "Ayam Goreng",
+        
         // Drinks Menu Items
         "Teh Tarik": "Teh Tarik",
         "Kopi O": "Kopi O",
         "Milo Ais": "Milo Ais",
         "Teh O Ais Limau": "Teh O Ais Limau",
         "Air Sirap": "Air Sirap",
-        "Coconut Shake": "Coconut Shake",
-        "Fresh Orange Juice": "Jus Oren Segar",
-        "Mineral Water": "Air Mineral"
+        "Barley Ice": "Barley Ais",
+        "Cham Ice": "Cham Ais",
+        "Coffee Ice": "Coffee Ais",
+        "Milo Ice": "Milo Ais",
+        "Nescafe Ice": "Nescafe Ais",
+        "Sirap Ice": "Sirap Ais",
+        "Teh Ice": "Teh Ais",
+        "Iced Barley": "Barley Ais",
+        "Iced Cham": "Cham Ais",
+        "Ice Coffee": "Coffee Ais",
+        "Iced Milo": "Milo Ais",
+        "Iced Nescafe": "Nescafe Ais",
+        "Iced Sirap": "Sirap Ais",
+        "Iced Tea": "Teh Ais",
+        "Iced Lemon Tea": "Teh O Ais Limau",
+        "Rose Syrup Drink": "Air Sirap"
     },
     
     // Tamil
@@ -434,8 +528,4 @@ document.addEventListener('DOMContentLoaded', function() {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { translations, t, setLanguage, updatePageTranslations };
 }
-
-
-
-
 
