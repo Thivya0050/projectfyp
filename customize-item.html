@@ -306,12 +306,8 @@
         .option-qty-btn:active {
             transform: scale(0.95);
         }
-
         .option-qty-btn.option-qty-btn-ice {
-            min-width: 44px;
-            width: auto;
-            padding: 0 10px;
-            font-size: 15px;
+            min-width: 44px; width: auto; padding: 0 10px; font-size: 15px;
         }
 
         .option-qty-display {
@@ -897,6 +893,13 @@
                 { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
                 { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
             ],
+            // BIHUN SOTO (Soto Bihun)
+            'bihun soto': [
+                { id: 'minced_chicken', name: 'Minced Chicken', name_ms: 'Ayam Cincang', name_ta: 'கோழி துண்டு', name_zh: '鸡肉碎', price: 3.00 },
+                { id: 'fried_potato', name: 'Fried Potato', name_ms: 'Kentang Goreng', name_ta: 'பொரித்த உருளைக்கிழங்கு', name_zh: '炸土豆', price: 3.00 },
+                { id: 'hot_spicy_sauce', name: 'Hot and Spicy Sauce', name_ms: 'Sos Pedas', name_ta: 'காரமான சாஸ்', name_zh: '辣酱', price: 1.00 },
+                { id: 'barbeque_sauce', name: 'Barbeque Sauce', name_ms: 'Sos BBQ', name_ta: 'பார்பிக்யூ சாஸ்', name_zh: '烧烤酱', price: 1.00 }
+            ],
             // CANTONESE NOODLES
             'cantonese noodles': [
                 { id: 'chicken', name: 'Chicken', name_ms: 'Ayam', name_ta: 'கோழி', name_zh: '鸡肉', price: 3.00 },
@@ -1036,6 +1039,8 @@
             
             // Handle common abbreviations and variations (order matters - check longer patterns first)
             const nameMappings = [
+                ['soto bihun', 'bihun soto'],
+                ['nasi lemak fried chicken', 'nasi lemak ayam goreng'],
                 ['nasi lemak ag', 'nasi lemak ayam goreng'],
                 ['nasi lemak as', 'nasi lemak ayam sambal'],
                 ['nl ag', 'nasi lemak ayam goreng'],
@@ -1078,8 +1083,9 @@
             console.log('Getting customizations for:', lowerName);
             console.log('Normalized name:', normalizedName);
             
-            // Check if item has no customization
+            // Check if item has no customization (skip 'fried chicken' for nasi lemak dishes so "Nasi Lemak Fried Chicken" gets options)
             for (const noCustomItem of noCustomizationItems) {
+                if (noCustomItem === 'fried chicken' && (lowerName.includes('nasi lemak') || normalizedName.includes('nasi lemak'))) continue;
                 if (lowerName.includes(noCustomItem) || noCustomItem.includes(lowerName) ||
                     normalizedName.includes(noCustomItem) || noCustomItem.includes(normalizedName)) {
                     console.log('No customization match:', noCustomItem);
@@ -1242,11 +1248,10 @@
                 
                 const priceText = option.price > 0 ? `+RM ${option.price.toFixed(2)}` : t('free');
                 const qty = customizationQuantities[option.id] || 0;
-                // Drinks ice only: show "Less" / "More" instead of − / +. Rice, sides, noodles unchanged.
-                const isDrinkIce = (option.id === 'ice');
-                const leftBtn = isDrinkIce ? (typeof t === 'function' ? t('lessIce') : 'Less') : '−';
-                const rightBtn = isDrinkIce ? (typeof t === 'function' ? t('moreIce') : 'More') : '+';
-                const iceClass = isDrinkIce ? ' option-qty-btn-ice' : '';
+                var leftBtn = '−';
+                var rightBtn = '+';
+                var iceClass = '';
+                if (option.id === 'ice') { leftBtn = 'Less'; rightBtn = 'More'; iceClass = ' option-qty-btn-ice'; }
                 return `
                     <div class="customization-option">
                         <div class="option-label">${optionName}</div>
