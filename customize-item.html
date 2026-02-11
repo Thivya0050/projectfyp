@@ -307,6 +307,13 @@
             transform: scale(0.95);
         }
 
+        .option-qty-btn.option-qty-btn-ice {
+            min-width: 44px;
+            width: auto;
+            padding: 0 10px;
+            font-size: 15px;
+        }
+
         .option-qty-display {
             font-size: 18px;
             font-weight: bold;
@@ -1235,15 +1242,19 @@
                 
                 const priceText = option.price > 0 ? `+RM ${option.price.toFixed(2)}` : t('free');
                 const qty = customizationQuantities[option.id] || 0;
-                
+                // Drinks ice only: show "Less" / "More" instead of − / +. Rice, sides, noodles unchanged.
+                const isDrinkIce = (option.id === 'ice');
+                const leftBtn = isDrinkIce ? (typeof t === 'function' ? t('lessIce') : 'Less') : '−';
+                const rightBtn = isDrinkIce ? (typeof t === 'function' ? t('moreIce') : 'More') : '+';
+                const iceClass = isDrinkIce ? ' option-qty-btn-ice' : '';
                 return `
                     <div class="customization-option">
                         <div class="option-label">${optionName}</div>
                         <div class="option-price">${priceText}</div>
                         <div class="option-quantity-controls">
-                            <button class="option-qty-btn" onclick="decreaseOptionQty('${option.id}')">−</button>
+                            <button class="option-qty-btn${iceClass}" onclick="decreaseOptionQty('${option.id}')">${leftBtn}</button>
                             <div class="option-qty-display" id="qty_${option.id}">${qty}</div>
-                            <button class="option-qty-btn" onclick="increaseOptionQty('${option.id}')">+</button>
+                            <button class="option-qty-btn${iceClass}" onclick="increaseOptionQty('${option.id}')">${rightBtn}</button>
                         </div>
                     </div>
                 `;
